@@ -1,0 +1,121 @@
+import { defineConfig } from 'vitepress'
+
+export default defineConfig({
+  title: '前端知识库',
+  description: '基于项目实战的前端开发知识库',
+  base: '/frontend-knowledge-base/',
+  ignoreDeadLinks: true,
+  
+  themeConfig: {
+    siteTitle: '前端知识库',
+    
+    nav: [
+      { text: '首页', link: '/' },
+      { text: 'Vue', link: '/knowledge/vue-instance' },
+      { text: 'axios', link: '/knowledge/axios-http' },
+      { text: 'Element UI', link: '/knowledge/element-ui-layout' },
+      { text: 'Bootstrap', link: '/knowledge/bootstrap-grid' },
+      { text: 'CSS', link: '/knowledge/css-flexbox' },
+      { text: 'JavaScript', link: '/knowledge/filereader' }
+    ],
+    
+    sidebar: [
+      {
+        text: 'Vue 2 核心',
+        collapsed: false,
+        items: [
+          { text: 'Vue 实例创建', link: '/knowledge/vue-instance' },
+          { text: '模板语法', link: '/knowledge/vue-template-syntax' },
+          { text: '数据绑定', link: '/knowledge/vue-data-binding' },
+          { text: '事件处理', link: '/knowledge/vue-event-handling' },
+          { text: '条件渲染', link: '/knowledge/vue-conditional-rendering' },
+          { text: '列表渲染', link: '/knowledge/vue-list-rendering' },
+          { text: '生命周期', link: '/knowledge/vue-lifecycle' },
+          { text: '组件注册', link: '/knowledge/vue-component' },
+          { text: 'Vue Router', link: '/knowledge/vue-router' }
+        ]
+      },
+      {
+        text: 'axios HTTP',
+        collapsed: true,
+        items: [
+          { text: 'HTTP 请求', link: '/knowledge/axios-http' },
+          { text: '拦截器', link: '/knowledge/axios-interceptors' },
+          { text: 'Token 存储', link: '/knowledge/localstorage-token' }
+        ]
+      },
+      {
+        text: 'Element UI',
+        collapsed: true,
+        items: [
+          { text: '布局系统', link: '/knowledge/element-ui-layout' },
+          { text: '表单组件', link: '/knowledge/element-ui-form' },
+          { text: '表格组件', link: '/knowledge/element-ui-table' }
+        ]
+      },
+      {
+        text: 'Bootstrap 3',
+        collapsed: true,
+        items: [
+          { text: '栅格系统', link: '/knowledge/bootstrap-grid' },
+          { text: '导航条', link: '/knowledge/bootstrap-navbar' },
+          { text: '模态框', link: '/knowledge/bootstrap-modal' }
+        ]
+      },
+      {
+        text: 'CSS',
+        collapsed: true,
+        items: [
+          { text: 'Flexbox 布局', link: '/knowledge/css-flexbox' },
+          { text: '定位', link: '/knowledge/css-position' },
+          { text: '盒模型', link: '/knowledge/css-box-model' }
+        ]
+      },
+      {
+        text: 'JavaScript',
+        collapsed: true,
+        items: [
+          { text: 'FileReader API', link: '/knowledge/filereader' },
+          { text: 'Canvas API', link: '/knowledge/canvas-api' },
+          { text: 'DOM 操作', link: '/knowledge/dom-manipulation' },
+          { text: '表单验证', link: '/knowledge/form-validation' }
+        ]
+      },
+      {
+        text: '工程化',
+        collapsed: true,
+        items: [
+          { text: 'Vue CLI 代理', link: '/knowledge/vue-cli-proxy' }
+        ]
+      }
+    ],
+    
+    search: {
+      provider: 'local',
+      options: {
+        translations: {
+          button: { buttonText: '搜索', buttonAriaLabel: '搜索' },
+          modal: {
+            noResultsText: '没有找到结果',
+            footer: { selectText: '选择', closeText: '关闭' }
+          }
+        }
+      }
+    },
+    
+    footer: {
+      message: '基于 VitePress 构建',
+      copyright: '前端知识库'
+    },
+    
+    lastUpdated: {
+      text: '最后更新',
+      formatOptions: { dateStyle: 'short', timeStyle: 'short' }
+    }
+  },
+  
+  markdown: {
+    theme: 'github-dark',
+    lineNumbers: true
+  }
+})
