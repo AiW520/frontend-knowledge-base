@@ -1,403 +1,209 @@
-# 智能合约前端调用
+# Element Plus 表单验证
 
-## 知识简介
+## 竞赛关联
 
-智能合约是区块链应用的核心，前端需要能够部署合约、调用合约方法、监听合约事件。在金砖大赛中，选手需要通过 WeBASE-Front 或 Web3.js 在前端实现对智能合约的完整操作。本知识点以 Solidity 编写的 ERC-20 代币合约为例，展示前端如何与智能合约进行全生命周期交互。
+比赛常考表单验证，要求选手在登录页面或数据提交页面中正确使用 Element Plus 的表单验证规则，包括非空验证、格式验证、自定义校验等。掌握表单验证是前端开发的基础功。
 
-## 核心概念
+## 核心技能
 
-- **智能合约**：运行在区块链上的自动化程序，由 Solidity 语言编写
-- **ABI（Application Binary Interface）**：描述合约方法和事件的 JSON 文件，前端调用合约的"说明书"
-- **合约部署**：将合约字节码发送到区块链，创建合约实例
-- **合约调用**：分为只读调用（call）和状态修改交易（send）
-- **事件日志**：合约执行过程中 emit 的日志，前端可监听
+- **el-form 验证规则**：使用 `rules` 属性配置验证规则
+- **required 验证**：`required: true` 非空验证
+- **pattern 正则验证**：电话号码、邮箱等格式验证
+- **自定义 validator**：编写自定义校验逻辑
+- **手动触发验证**：`formRef.validate()` 手动校验
+- **表单重置**：`formRef.resetFields()` 重置表单
 
 ## 详细讲解
 
-### 1. 合约 ABI 示例（ERC-20 代币）
-
-```json
-[
-  {
-    "constant": true,
-    "inputs": [{"name": "_owner", "type": "address"}],
-    "name": "balanceOf",
-    "outputs": [{"name": "balance", "type": "uint256"}],
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {"name": "_to", "type": "address"},
-      {"name": "_value", "type": "uint256"}
-    ],
-    "name": "transfer",
-    "outputs": [{"name": "success", "type": "bool"}],
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {"indexed": true, "name": "_from", "type": "address"},
-      {"indexed": true, "name": "_to", "type": "address"},
-      {"indexed": false, "name": "_value", "type": "uint256"}
-    ],
-    "name": "Transfer",
-    "type": "event"
-  }
-]
-```
-
-### 2. 合约操作 Composable（src/composables/useContract.ts）
-
-```typescript
-import { ref } from 'vue'
-import Web3 from 'web3'
-import type { Contract, EventLog } from 'web3-eth-contract'
-
-interface ContractCallResult {
-  success: boolean
-  data?: any
-  txHash?: string
-  error?: string
-}
-
-export function useContractOperations(web3: Web3) {
-  const loading = ref(false)
-  const error = ref<string | null>(null)
-
-  /**
-   * 部署合约
-   */
-  const deployContract = async (
-    abi: any[],
-    bytecode: string,
-    fromAddress: string,
-    constructorArgs: any[] = []
-  ): Promise<ContractCallResult> => {
-    loading.value = true
-    error.value = null
-
-    try {
-      const contract = new web3.eth.Contract(abi)
-      const deploy = contract.deploy({
-        data: bytecode,
-        arguments: constructorArgs
-      })
-
-      const gas = await deploy.estimateGas({ from: fromAddress })
-      const deployedContract = await deploy.send({
-        from: fromAddress,
-        gas: Math.floor(Number(gas) * 1.2)
-      })
-
-      return {
-        success: true,
-        data: deployedContract.options.address,
-        txHash: (deployedContract as any).transactionHash
-      }
-    } catch (err: any) {
-      error.value = err.message
-      return { success: false, error: err.message }
-    } finally {
-      loading.value = false
-    }
-  }
-
-  /**
-   * 调用只读方法（如 balanceOf）
-   */
-  const callReadMethod = async (
-    abi: any[],
-    contractAddress: string,
-    methodName: string,
-    args: any[] = []
-  ): Promise<ContractCallResult> => {
-    loading.value = true
-    error.value = null
-
-    try {
-      const contract = new web3.eth.Contract(abi, contractAddress)
-      const result = await contract.methods[methodName](...args).call()
-
-      return { success: true, data: result }
-    } catch (err: any) {
-      error.value = err.message
-      return { success: false, error: err.message }
-    } finally {
-      loading.value = false
-    }
-  }
-
-  /**
-   * 发送交易（如 transfer）
-   */
-  const sendTransaction = async (
-    abi: any[],
-    contractAddress: string,
-    methodName: string,
-    fromAddress: string,
-    args: any[] = []
-  ): Promise<ContractCallResult> => {
-    loading.value = true
-    error.value = null
-
-    try {
-      const contract = new web3.eth.Contract(abi, contractAddress)
-      const method = contract.methods[methodName](...args)
-
-      const gas = await method.estimateGas({ from: fromAddress })
-      const result = await method.send({
-        from: fromAddress,
-        gas: Math.floor(Number(gas) * 1.2)
-      })
-
-      return {
-        success: true,
-        txHash: result.transactionHash,
-        data: result
-      }
-    } catch (err: any) {
-      error.value = err.message
-      return { success: false, error: err.message }
-    } finally {
-      loading.value = false
-    }
-  }
-
-  /**
-   * 监听合约事件
-   */
-  const watchEvent = (
-    abi: any[],
-    contractAddress: string,
-    eventName: string,
-    callback: (event: EventLog) => void,
-    filterOptions: Record<string, any> = {}
-  ) => {
-    const contract = new web3.eth.Contract(abi, contractAddress)
-
-    contract.events[eventName]({
-      filter: filterOptions,
-      fromBlock: 'latest'
-    })
-      .on('data', callback)
-      .on('error', (err: Error) => {
-        error.value = `监听事件失败: ${err.message}`
-      })
-
-    // 返回取消监听函数
-    return () => {
-      contract.events[eventName]().removeAllListeners()
-    }
-  }
-
-  return {
-    loading,
-    error,
-    deployContract,
-    callReadMethod,
-    sendTransaction,
-    watchEvent
-  }
-}
-```
-
-### 3. 前端页面示例：代币转账
+### 1. 基础验证规则
 
 ```vue
 <template>
-  <el-card class="contract-card">
-    <template #header>
-      <span>合约交互 - ERC-20 代币</span>
-    </template>
+  <el-form
+    ref="formRef"
+    :model="formData"
+    :rules="rules"
+    label-width="100px"
+    size="default"
+  >
+    <el-form-item label="用户名" prop="username">
+      <el-input v-model="formData.username" placeholder="请输入用户名" />
+    </el-form-item>
 
-    <!-- 部署合约 -->
-    <el-form label-width="120px" v-if="!contractAddress">
-      <el-form-item label="合约名称">
-        <el-input v-model="contractName" placeholder="MyToken" />
-      </el-form-item>
-      <el-form-item label="初始供应量">
-        <el-input v-model="initialSupply" placeholder="1000000" />
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          type="primary"
-          @click="handleDeploy"
-          :loading="loading"
-        >
-          部署合约
-        </el-button>
-      </el-form-item>
-    </el-form>
+    <el-form-item label="手机号" prop="phone">
+      <el-input v-model="formData.phone" placeholder="请输入手机号" />
+    </el-form-item>
 
-    <!-- 合约已部署，显示交互界面 -->
-    <div v-else>
-      <el-alert
-        :title="`合约地址: ${contractAddress}`"
-        type="success"
-        :closable="false"
-        show-icon
-      />
+    <el-form-item label="邮箱" prop="email">
+      <el-input v-model="formData.email" placeholder="请输入邮箱" />
+    </el-form-item>
 
-      <el-divider />
+    <el-form-item label="年龄" prop="age">
+      <el-input-number v-model="formData.age" :min="1" :max="150" />
+    </el-form-item>
 
-      <!-- 查询余额 -->
-      <el-form label-width="120px" inline>
-        <el-form-item label="查询地址">
-          <el-input v-model="queryAddress" placeholder="0x..." style="width: 300px" />
-        </el-form-item>
-        <el-form-item>
-          <el-button @click="handleBalanceOf">查询余额</el-button>
-          <span v-if="balance !== null" class="balance-result">
-            余额: {{ balance }}
-          </span>
-        </el-form-item>
-      </el-form>
-
-      <el-divider />
-
-      <!-- 转账 -->
-      <el-form label-width="120px">
-        <el-form-item label="接收地址">
-          <el-input v-model="toAddress" placeholder="0x..." style="width: 400px" />
-        </el-form-item>
-        <el-form-item label="转账金额">
-          <el-input-number v-model="transferAmount" :min="0" />
-        </el-form-item>
-        <el-form-item>
-          <el-button
-            type="primary"
-            @click="handleTransfer"
-            :loading="transferLoading"
-          >
-            转账
-          </el-button>
-        </el-form-item>
-      </el-form>
-
-      <el-divider />
-
-      <!-- 交易记录 -->
-      <el-table :data="transferEvents" stripe>
-        <el-table-column prop="from" label="发送方" min-width="200" />
-        <el-table-column prop="to" label="接收方" min-width="200" />
-        <el-table-column prop="value" label="金额" width="150" />
-      </el-table>
-    </div>
-  </el-card>
+    <el-form-item>
+      <el-button type="primary" @click="handleSubmit">提交</el-button>
+      <el-button @click="handleReset">重置</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useWeb3 } from '@/composables/useWeb3'
-import { useContractOperations } from '@/composables/useContract'
+import { ref, reactive } from 'vue'
+import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
-const { web3 } = useWeb3()
-const { loading, deployContract, callReadMethod, sendTransaction, watchEvent } =
-  useContractOperations(web3.value!)
+const formRef = ref<FormInstance>()
 
-const contractAddress = ref('')
-const contractName = ref('MyToken')
-const initialSupply = ref('1000000')
-const queryAddress = ref('')
-const balance = ref<string | null>(null)
-const toAddress = ref('')
-const transferAmount = ref(0)
-const transferLoading = ref(false)
-const transferEvents = ref<any[]>([])
-
-const handleDeploy = async () => {
-  const result = await deployContract(
-    erc20ABI,
-    erc20Bytecode,
-    userAddress.value,
-    [contractName.value, initialSupply.value]
-  )
-  if (result.success) {
-    contractAddress.value = result.data
-    startWatchingEvents()
-  }
+interface UserForm {
+  username: string
+  phone: string
+  email: string
+  age: number | undefined
 }
 
-const handleBalanceOf = async () => {
-  const result = await callReadMethod(
-    erc20ABI,
-    contractAddress.value,
-    'balanceOf',
-    [queryAddress.value]
-  )
-  if (result.success) {
-    balance.value = result.data
-  }
+const formData = reactive<UserForm>({
+  username: '',
+  phone: '',
+  email: '',
+  age: undefined
+})
+
+// 验证规则
+const rules: FormRules<UserForm> = {
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '用户名长度在 3 到 20 个字符', trigger: 'blur' }
+  ],
+  phone: [
+    { required: true, message: '请输入手机号', trigger: 'blur' },
+    { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号', trigger: 'blur' }
+  ],
+  email: [
+    { required: true, message: '请输入邮箱', trigger: 'blur' },
+    { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
+  ],
+  age: [
+    { required: true, message: '请输入年龄', trigger: 'change' },
+    { type: 'number', min: 1, max: 150, message: '年龄范围 1-150', trigger: 'change' }
+  ]
 }
 
-const handleTransfer = async () => {
-  transferLoading.value = true
-  const result = await sendTransaction(
-    erc20ABI,
-    contractAddress.value,
-    'transfer',
-    userAddress.value,
-    [toAddress.value, transferAmount.value]
-  )
-  if (result.success) {
-    ElMessage.success(`转账成功! 交易哈希: ${result.txHash}`)
-  }
-  transferLoading.value = false
+const handleSubmit = async () => {
+  if (!formRef.value) return
+
+  // 手动触发验证
+  const valid = await formRef.value.validate()
+  if (!valid) return
+
+  // 验证通过，提交数据
+  ElMessage.success('提交成功')
+  console.log('提交数据:', formData)
 }
 
-const startWatchingEvents = () => {
-  watchEvent(erc20ABI, contractAddress.value, 'Transfer', (event) => {
-    transferEvents.value.unshift({
-      from: (event.returnValues as any).from,
-      to: (event.returnValues as any).to,
-      value: (event.returnValues as any).value
-    })
-  })
+const handleReset = () => {
+  formRef.value?.resetFields()
 }
 </script>
 ```
 
+### 2. 自定义验证器
+
+```vue
+<script setup lang="ts">
+import type { FormRules } from 'element-plus'
+
+// 自定义验证：检查用户名是否已被占用
+const validateUsername = async (rule: any, value: string, callback: any) => {
+  if (!value) {
+    callback(new Error('请输入用户名'))
+    return
+  }
+
+  // 模拟异步请求检查用户名
+  try {
+    // const res = await checkUsername(value)
+    const isExist = false  // 假设返回 false 表示可用
+
+    if (isExist) {
+      callback(new Error('用户名已被占用'))
+    } else {
+      callback()  // 验证通过
+    }
+  } catch (error) {
+    callback(new Error('验证失败，请重试'))
+  }
+}
+
+// 自定义验证：确认密码
+const validateConfirmPassword = (rule: any, value: string, callback: any) => {
+  if (!value) {
+    callback(new Error('请再次输入密码'))
+    return
+  }
+  if (value !== formData.password) {
+    callback(new Error('两次输入的密码不一致'))
+  } else {
+    callback()
+  }
+}
+
+const rules: FormRules = {
+  username: [
+    { required: true, validator: validateUsername, trigger: 'blur' }
+  ],
+  confirmPassword: [
+    { required: true, validator: validateConfirmPassword, trigger: 'blur' }
+  ]
+}
+</script>
+```
+
+### 3. Element Plus 常用验证规则速查
+
+| 规则类型 | 配置示例 | 说明 |
+|----------|---------|------|
+| 非空验证 | `{ required: true, message: '不能为空', trigger: 'blur' }` | 必填字段 |
+| 长度限制 | `{ min: 3, max: 20, message: '3-20个字符', trigger: 'blur' }` | 字符串长度 |
+| 正则验证 | `{ pattern: /^1[3-9]\d{9}$/, message: '手机号格式错误', trigger: 'blur' }` | 格式校验 |
+| 邮箱验证 | `{ type: 'email', message: '邮箱格式错误', trigger: 'blur' }` | 内置邮箱类型 |
+| 数字验证 | `{ type: 'number', min: 1, max: 150, message: '范围1-150', trigger: 'change' }` | 数字范围 |
+| 自定义验证 | `{ validator: myValidator, trigger: 'blur' }` | 自定义逻辑 |
+
+### 4. trigger 触发时机
+
+| trigger | 说明 |
+|---------|------|
+| `blur` | 失去焦点时验证（适合输入框） |
+| `change` | 值改变时验证（适合选择器、数字输入） |
+| 不设置 | 仅在调用 `validate()` 时验证 |
+
 ## 重点内容
 
-- **ABI 是合约交互的关键**：没有 ABI 无法调用合约方法
-- **只读方法用 `call()`**：不消耗 Gas，不产生交易
-- **状态修改方法用 `send()`**：消耗 Gas，需要等待区块链确认
-- **事件监听**：用于实时更新 UI（如监听转账事件刷新余额）
-- **Gas 估算**：`estimateGas()` 避免 Gas 不足导致交易失败
-
-## 实际应用场景
-
-- 代币转账界面（ERC-20）
-- 存证上链（证书哈希存储）
-- 供应链溯源（商品流转记录）
-- 投票系统（链上投票统计）
+- `el-form` 的 `ref` 在 TypeScript 中标注为 `FormInstance` 类型
+- `el-form-item` 的 `prop` 属性必须与 `formData` 的字段名对应
+- 自定义验证器：验证失败 `callback(new Error('...'))`，验证通过 `callback()`
+- 多个规则按数组顺序执行，前面的规则失败后后面的不会执行
+- 手动验证：`await formRef.value.validate()` 返回布尔值
 
 ## 注意事项
 
-- 合约地址在部署后保持不变，需要妥善保存
-- 合约一旦部署，代码无法修改（需重新部署新合约）
-- `send()` 是异步操作，交易确认需要时间，前端需要显示 loading 状态
-- 事件监听需要及时取消，避免内存泄漏
-- 用户地址需要解锁（unlock）才能发送交易
+- `rules` 在 TypeScript 中需要标注 `FormRules<FormData>` 泛型
+- 自定义验证器中 `callback` 必须调用，否则表单一直处于验证中
+- `resetFields()` 会重置表单为初始值，不是清空
+- 表单 `model` 和 `rules` 中的字段名必须一致
 
 ## 常见误区
 
-- 误区：修改状态的方法用了 `call()` 而不是 `send()`
-- 误区：ABI 与合约版本不匹配导致调用失败
-- 误区：Gas 设置过低导致交易一直 pending
-- 误区：忽略 `send()` 返回的交易回执中的 `events` 字段
-
-## 关联知识点
-
-- [Web3.js 区块链交互](/knowledge/web3-blockchain-interaction)
-- [Axios 封装与 API 对接](/knowledge/axios-api-encapsulation)
-- [Element Plus 组件库](/knowledge/element-plus)
+- 误区：忘记给 `el-form-item` 设置 `prop`，验证不生效
+- 误区：自定义验证器中使用 `return` 而不调用 `callback`
+- 误区：`rules` 写在 `ref` 中包裹，模板中不需要 `.value`，但 `formRef` 在 script 中需要 `.value`
+- 误区：`trigger: 'blur'` 和 `trigger: 'change'` 混用，无法在期望时机触发验证
 
 ## 官方资源扩展
 
-- [Solidity 官方文档](https://docs.soliditylang.org/zh/latest/) - Solidity 智能合约语言官方中文文档
-- [OpenZeppelin 合约库](https://docs.openzeppelin.com/contracts/) - 业界标准的安全合约模板（ERC-20/ERC-721 等）
-- [FISCO BCOS 智能合约开发](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/develop/smart_contract.html) - FISCO BCOS 官方合约开发指南
-- [Remix IDE](https://remix.ethereum.org/) - 在线 Solidity 开发环境，快速测试合约
+- [Element Plus Form 表单](https://element-plus.org/zh-CN/component/form.html) - 表单组件完整文档，最佳学习资源
+- [Element Plus 自定义校验](https://element-plus.org/zh-CN/component/form.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%A1%E9%AA%8C) - 官方自定义校验指南
+- [async-validator GitHub](https://github.com/yiminghe/async-validator) - Element Plus 表单底层验证库
+- [Element Plus Input 输入框](https://element-plus.org/zh-CN/component/input.html) - 输入框组件

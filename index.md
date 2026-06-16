@@ -4,21 +4,20 @@
 
 ---
 
-## 🏆 金砖大赛 - 区块链前端开发（新增）
+## 🏆 金砖大赛 - 区块链前端开发（专项训练）
 
-**专为一带一路暨金砖国家技能发展与技术创新大赛——区块链应用开发与运维赛项前端部分设计**，基于 **FISCO BCOS + WeBASE** 平台，覆盖 **Vue 3 + TypeScript + Element Plus + Web3.js** 全链路技术栈。
+**专为一带一路暨金砖国家技能发展与技术创新大赛——区块链应用开发与运维赛项前端部分设计**。赛题采用 **「填空式」** 命题，选手需在 Vue 3 + TypeScript 项目模板中补充关键代码。本模块根据赛题规律，提供 10 个核心技能专项训练，每个知识点均包含**同类场景的完整代码示例**和**官方最佳学习资源**。
 
-- [区块链前端开发概述](/knowledge/blockchain-frontend-overview) - 赛项背景、技术栈、学习路径
-- [Vue 3 + TS 项目搭建](/knowledge/vue3-ts-project-setup) - Vite + Vue 3 + TypeScript 工程化搭建
-- [Element Plus 组件库](/knowledge/element-plus) - 企业级 UI 组件库实战
-- [Vue Router 4 路由](/knowledge/vue-router4-advanced) - 路由配置、导航守卫、权限控制
-- [Pinia 状态管理](/knowledge/pinia) - 全局状态管理
-- [Axios 封装与 API 对接](/knowledge/axios-api-encapsulation) - WeBASE API 对接
-- [Web3.js 区块链交互](/knowledge/web3-blockchain-interaction) - 连接节点、查询区块、发送交易
-- [智能合约前端调用](/knowledge/smart-contract-frontend) - ABI 加载、合约方法调用、事件监听
-- [区块链数据可视化](/knowledge/blockchain-data-visualization) - ECharts 展示区块链数据
-- [表单设计与验证](/knowledge/form-validation) - 复杂表单设计、异步校验
-- [前端部署与优化](/knowledge/frontend-deployment) - 构建优化、Nginx 部署
+- [赛项概述与赛程](/knowledge/blockchain-frontend-overview) - 比赛流程、模块分值、考核方式、技术栈
+- [Vue 3 登录表单开发](/knowledge/vue3-ts-project-setup) - 表单双绑、非空验证、API调用、路由跳转
+- [Vue 3 数据列表与表格](/knowledge/element-plus) - Element Plus 表格、分页、数据获取、loading
+- [Vue Router 4 路由导航](/knowledge/vue-router4-advanced) - 路由跳转、传参、导航守卫、重定向
+- [Axios 封装与 API 调用](/knowledge/axios-api-encapsulation) - 拦截器、统一错误处理、请求封装
+- [Vue 3 文件下载功能](/knowledge/web3-blockchain-interaction) - a标签下载、Blob流、下载提示
+- [Element Plus 表单验证](/knowledge/smart-contract-frontend) - el-form验证、自定义校验规则
+- [错误处理与用户反馈](/knowledge/blockchain-data-visualization) - ElMessage、异常捕获、loading状态
+- [项目配置与环境搭建](/knowledge/form-validation) - vite.config.ts、环境变量、代理
+- [综合实战：完整页面开发](/knowledge/frontend-deployment) - 数据流：获取→展示→交互→反馈
 
 ---
 

@@ -1,169 +1,174 @@
-# Vue 3 + TypeScript + Vite 项目搭建
+# Vue 3 登录表单开发
 
-## 知识简介
+## 竞赛关联
 
-使用 Vite 构建工具快速搭建 Vue 3 + TypeScript 项目，是区块链应用开发的第一步。Vite 提供极速的冷启动和热更新，TypeScript 提供类型安全，Vue 3 的组合式 API 提供更好的逻辑组织能力。本知识点将完整演示从零搭建一个可用于金砖大赛区块链前端开发的项目。
+比赛前端部分常考登录页面开发，要求选手实现：表单数据双向绑定、非空校验、调用后端登录接口、成功后跳转到首页。这是前端开发中最基础也最重要的页面模式。
 
-## 核心概念
+## 核心技能
 
-- **Vite**：新一代前端构建工具，基于 ES Module，开发服务器秒级启动
-- **TypeScript**：JavaScript 的超集，提供静态类型检查
-- **Vue 3 Composition API**：`<script setup>` 语法糖 + 响应式 API
-- **项目结构规范**：src/views、src/components、src/api、src/stores、src/router 目录划分
+- **v-model 双向绑定**：将表单输入与数据对象关联
+- **表单非空验证**：提交前检查必填字段
+- **Axios 调用 API**：发送登录请求，处理响应
+- **路由跳转**：登录成功后使用 `router.push()` 跳转
+- **Element Plus 消息提示**：成功/失败时给用户反馈
 
 ## 详细讲解
 
-### 1. 创建项目
+### 1. v-model 表单数据双向绑定
 
-```bash
-# 使用 Vite 官方模板创建项目
-npm create vite@latest blockchain-app -- --template vue-ts
+```vue
+<template>
+  <el-form ref="formRef" :model="loginForm" label-width="80px">
+    <el-form-item label="用户名" prop="username">
+      <el-input
+        v-model="loginForm.username"
+        placeholder="请输入用户名"
+        clearable
+      />
+    </el-form-item>
 
-# 进入项目目录
-cd blockchain-app
+    <el-form-item label="密码" prop="password">
+      <el-input
+        v-model="loginForm.password"
+        type="password"
+        placeholder="请输入密码"
+        show-password
+        @keyup.enter="handleLogin"
+      />
+    </el-form-item>
 
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
+    <el-form-item>
+      <el-button
+        type="primary"
+        :loading="loading"
+        @click="handleLogin"
+        style="width: 100%"
+      >
+        {{ loading ? '登录中...' : '登录' }}
+      </el-button>
+    </el-form-item>
+  </el-form>
+</template>
 ```
 
-### 2. 推荐项目结构
+### 2. 非空验证与 API 调用
 
-```
-blockchain-app/
-├── public/                    # 静态资源
-├── src/
-│   ├── api/                   # API 接口层
-│   │   ├── webase.ts          # WeBASE API 接口
-│   │   └── contract.ts        # 合约相关接口
-│   ├── assets/                # 样式/图片资源
-│   ├── components/            # 公共组件
-│   │   ├── BlockHash.vue      # 区块哈希展示组件
-│   │   ├── TransactionList.vue # 交易列表组件
-│   │   └── ContractForm.vue   # 合约交互表单
-│   ├── composables/           # 组合式函数
-│   │   ├── useWeb3.ts         # Web3 连接 hooks
-│   │   └── useContract.ts     # 合约操作 hooks
-│   ├── router/                # 路由配置
-│   │   └── index.ts
-│   ├── stores/                # Pinia 状态管理
-│   │   ├── blockchain.ts     # 区块链状态
-│   │   └── user.ts           # 用户状态
-│   ├── types/                 # TypeScript 类型定义
-│   │   ├── blockchain.d.ts    # 区块链相关类型
-│   │   └── api.d.ts           # API 响应类型
-│   ├── views/                 # 页面组件
-│   │   ├── BlockExplorer.vue  # 区块链浏览器
-│   │   ├── ContractDeploy.vue # 合约部署
-│   │   └── Dashboard.vue      # 仪表盘
-│   ├── App.vue
-│   ├── main.ts
-│   └── env.d.ts               # 环境变量类型声明
-├── .env.development            # 开发环境变量
-├── .env.production             # 生产环境变量
-├── index.html
-├── package.json
-├── tsconfig.json
-├── tsconfig.node.json
-└── vite.config.ts
+```vue
+<script setup lang="ts">
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import { loginApi } from '@/api/user'
+
+const router = useRouter()
+const loading = ref(false)
+
+const loginForm = reactive({
+  username: '',
+  password: ''
+})
+
+const handleLogin = async () => {
+  // 1. 非空验证
+  if (!loginForm.username.trim()) {
+    ElMessage.warning('请输入用户名')
+    return
+  }
+  if (!loginForm.password.trim()) {
+    ElMessage.warning('请输入密码')
+    return
+  }
+
+  // 2. 调用登录接口
+  loading.value = true
+  try {
+    const res = await loginApi({
+      username: loginForm.username,
+      password: loginForm.password
+    })
+
+    // 3. 登录成功处理
+    if (res.code === 0) {
+      // 存储 token
+      localStorage.setItem('token', res.data.token)
+      ElMessage.success('登录成功')
+
+      // 4. 跳转到首页
+      router.push('/index')
+    } else {
+      ElMessage.error(res.message || '登录失败')
+    }
+  } catch (error) {
+    console.error('登录失败:', error)
+    ElMessage.error('登录失败，请检查网络连接')
+  } finally {
+    loading.value = false
+  }
+}
+</script>
 ```
 
-### 3. Vite 配置（vite.config.ts）
+### 3. 登录 API 封装
 
 ```typescript
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+// src/api/user.ts
+import request from './request'
 
-export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src')  // 路径别名
-    }
-  },
-  server: {
-    port: 3000,
-    // 代理配置：解决 WeBASE API 跨域问题
-    proxy: {
-      '/webase': {
-        target: 'http://localhost:5002',  // WeBASE-Front 地址
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/webase/, '')
-      }
-    }
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: false,
-    chunkSizeWarningLimit: 1500
+interface LoginParams {
+  username: string
+  password: string
+}
+
+interface LoginResponse {
+  code: number
+  message: string
+  data: {
+    token: string
+    userId: number
+    username: string
   }
-})
+}
+
+export const loginApi = (params: LoginParams) => {
+  return request.post<LoginResponse>('/user/login', params)
+}
 ```
 
-### 4. TypeScript 配置（tsconfig.json）
+### 4. 路由跳转（带重定向）
 
-```json
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "moduleResolution": "bundler",
-    "strict": true,
-    "jsx": "preserve",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
-}
+```typescript
+// 登录成功后跳转到之前访问的页面
+const redirect = route.query.redirect as string
+router.push(redirect || '/index')
 ```
 
 ## 重点内容
 
-- Vite 开发服务器默认端口 5173，可通过 `server.port` 自定义
-- 代理配置是连接 WeBASE-Front 后端的关键，避免跨域问题
-- `@` 路径别名需要在 `tsconfig.json` 和 `vite.config.ts` 中同时配置
-- 环境变量文件（`.env.development` / `.env.production`）用于区分开发和生产环境的 API 地址
-
-## 实际应用场景
-
-- 金砖大赛中，需要在比赛开始前搭建好项目基础框架
-- 区块链应用通常需要多个页面：仪表盘、区块浏览器、合约管理、交易记录
-- 合理的前端项目结构能提高开发效率和代码可维护性
+- `v-model` 实现表单数据双向绑定，`reactive()` 包裹表单对象
+- 提交前先做非空判断，`if (!value.trim())` 检查空字符串
+- `loading` 状态防止重复提交，按钮显示 `:loading="loading"`
+- `try-catch-finally` 确保无论成功失败都关闭 loading
+- 使用 `ElMessage` 给用户明确的操作反馈
+- 密码框支持回车键 `@keyup.enter` 快捷提交
 
 ## 注意事项
 
-- `vite.config.ts` 中 `server.proxy` 的 target 地址需要根据实际 WeBASE 部署地址修改
-- TypeScript 严格模式（`strict: true`）能帮助避免类型错误，但需要养成写类型注解的习惯
-- 比赛环境通常是离线环境，需要提前将依赖打包或缓存
+- API 调用必须放在 `try-catch` 中，防止未捕获的异常
+- `loading.value = false` 要放在 `finally` 中，确保总是执行
+- 跳转前存储 token 到 localStorage，后续请求在拦截器中携带
+- 表单对象使用 `reactive` 而非 `ref`，模板中不需要 `.value`
 
 ## 常见误区
 
-- 误区：路径别名只在 `vite.config.ts` 中配置，忘记在 `tsconfig.json` 中同步
-- 误区：代理配置的 target 写错端口，导致 API 请求 404
-- 误区：忽略 `.env` 文件的环境变量配置，导致生产环境 API 地址错误
-
-## 关联知识点
-
-- [Element Plus 组件库](/knowledge/element-plus)
-- [Vue Router 4 路由](/knowledge/vue-router4-advanced)
-- [Pinia 状态管理](/knowledge/pinia)
+- 误区：非空验证时忘记 `.trim()`，空格也能通过
+- 误区：`loading` 只放在 `try` 块的 `finally` 外面，异常时 loading 无法关闭
+- 误区：`router.push` 使用路径字符串而非命名路由，重构时容易遗漏
+- 误区：接口返回结构不统一，没有做 `code` 判断
 
 ## 官方资源扩展
 
-- [Vite 官方中文文档](https://cn.vitejs.dev/) - Vite 构建工具完整指南，最佳官方学习资源
-- [Vue 3 官方文档 - 快速上手](https://cn.vuejs.org/guide/quick-start.html) - Vue 3 官方快速入门教程
-- [TypeScript 官方中文手册](https://www.typescriptlang.org/zh/docs/handbook/intro.html) - TS 官方学习资源
-- [Vue 3 + TypeScript 官方指南](https://cn.vuejs.org/guide/typescript/overview.html) - Vue 3 中使用 TypeScript 的官方最佳实践
-- [create-vue 官方脚手架](https://github.com/vuejs/create-vue) - Vue 官方项目脚手架工具
+- [Vue 3 表单输入绑定](https://cn.vuejs.org/guide/essentials/forms.html) - 官方表单双绑指南
+- [Element Plus Form 表单](https://element-plus.org/zh-CN/component/form.html) - 表单组件完整文档
+- [Element Plus Input 输入框](https://element-plus.org/zh-CN/component/input.html) - 输入框组件
+- [Element Plus Button 按钮](https://element-plus.org/zh-CN/component/button.html) - 按钮 loading 状态
+- [Vue Router 编程式导航](https://router.vuejs.org/zh/guide/essentials/navigation.html) - 路由跳转官方文档

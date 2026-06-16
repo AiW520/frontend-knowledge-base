@@ -26,17 +26,16 @@ export default defineConfig({
         text: '🏆 金砖大赛 - 区块链前端',
         collapsed: false,
         items: [
-          { text: '区块链前端开发概述', link: '/knowledge/blockchain-frontend-overview' },
-          { text: 'Vue 3 + TS 项目搭建', link: '/knowledge/vue3-ts-project-setup' },
-          { text: 'Element Plus 组件库', link: '/knowledge/element-plus' },
-          { text: 'Vue Router 4 路由', link: '/knowledge/vue-router4-advanced' },
-          { text: 'Pinia 状态管理', link: '/knowledge/pinia' },
-          { text: 'Axios 封装与 API 对接', link: '/knowledge/axios-api-encapsulation' },
-          { text: 'Web3.js 区块链交互', link: '/knowledge/web3-blockchain-interaction' },
-          { text: '智能合约前端调用', link: '/knowledge/smart-contract-frontend' },
-          { text: '区块链数据可视化', link: '/knowledge/blockchain-data-visualization' },
-          { text: '表单设计与验证', link: '/knowledge/form-validation' },
-          { text: '前端部署与优化', link: '/knowledge/frontend-deployment' }
+          { text: '赛项概述与赛程', link: '/knowledge/blockchain-frontend-overview' },
+          { text: 'Vue 3 登录表单开发', link: '/knowledge/vue3-ts-project-setup' },
+          { text: 'Vue 3 数据列表与表格', link: '/knowledge/element-plus' },
+          { text: 'Vue Router 4 路由导航', link: '/knowledge/vue-router4-advanced' },
+          { text: 'Axios 封装与 API 调用', link: '/knowledge/axios-api-encapsulation' },
+          { text: 'Vue 3 文件下载功能', link: '/knowledge/web3-blockchain-interaction' },
+          { text: 'Element Plus 表单验证', link: '/knowledge/smart-contract-frontend' },
+          { text: '错误处理与用户反馈', link: '/knowledge/blockchain-data-visualization' },
+          { text: '项目配置与环境搭建', link: '/knowledge/form-validation' },
+          { text: '综合实战：完整页面开发', link: '/knowledge/frontend-deployment' }
         ]
       },
       {

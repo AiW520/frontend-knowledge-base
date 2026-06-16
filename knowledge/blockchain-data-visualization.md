@@ -1,326 +1,234 @@
-# 区块链数据可视化（ECharts）
+# 错误处理与用户反馈
 
-## 知识简介
+## 竞赛关联
 
-区块链应用平台需要将区块数据、交易统计、节点状态等信息以图表形式直观展示。ECharts 是国产开源的数据可视化库，支持丰富的图表类型，与 Vue 3 集成良好。在金砖大赛中，仪表盘（Dashboard）页面通常需要使用图表展示区块链运行状态，是前端开发的重要考核点。
+比赛考核中，API 调用失败后需要给出正确的错误处理：使用 `console.error` 记录错误日志、使用 `ElMessage.error` 给用户友好提示。恰当的错误处理能提升用户体验，也是代码质量的重要体现。
 
-## 核心概念
+## 核心技能
 
-- **ECharts**：Apache 开源的数据可视化图表库，支持折线图、柱状图、饼图、仪表盘等
-- **vue-echarts**：ECharts 的 Vue 3 封装组件
-- **图表配置 option**：ECharts 通过 JSON 配置定义图表样式和数据
-- **响应式图表**：图表随窗口大小自适应调整
-- **数据刷新**：定时调用 API 获取最新数据并更新图表
+- **ElMessage 消息提示**：`success` / `error` / `warning` / `info` 四种类型
+- **try-catch-finally**：完整的异常捕获与资源清理
+- **console.error 日志**：开发调试时的错误日志输出
+- **loading 状态管理**：请求中显示加载状态，防止重复提交
+- **条件判断**：根据接口返回的 `code` 判断成功/失败
 
 ## 详细讲解
 
-### 1. 安装与配置
-
-```bash
-npm install echarts vue-echarts
-```
-
-`main.ts` 中全局注册：
-
-```typescript
-import { createApp } from 'vue'
-import App from './App.vue'
-import ECharts from 'vue-echarts'
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  GaugeChart
-} from 'echarts/charts'
-import {
-  TitleComponent,
-  TooltipComponent,
-  LegendComponent,
-  GridComponent
-} from 'echarts/components'
-
-// 注册必要的组件
-use([
-  CanvasRenderer,
-  LineChart,
-  BarChart,
-  PieChart,
-  GaugeChart,
-  TitleComponent,
-  TooltipComponent,
-  LegendComponent,
-  GridComponent
-])
-
-const app = createApp(App)
-app.component('VChart', ECharts)
-app.mount('#app')
-```
-
-### 2. 区块链仪表盘页面
+### 1. ElMessage 四种消息类型
 
 ```vue
-<template>
-  <div class="dashboard">
-    <!-- 概览卡片 -->
-    <el-row :gutter="20" class="overview-cards">
-      <el-col :span="6">
-        <el-statistic title="当前区块高度" :value="blockNumber" />
-      </el-col>
-      <el-col :span="6">
-        <el-statistic title="总交易数" :value="totalTxCount" />
-      </el-col>
-      <el-col :span="6">
-        <el-statistic title="活跃节点数" :value="activeNodes" />
-      </el-col>
-      <el-col :span="6">
-        <el-statistic title="已部署合约" :value="contractCount" />
-      </el-col>
-    </el-row>
-
-    <el-row :gutter="20" class="chart-row">
-      <!-- 近24小时交易量趋势 -->
-      <el-col :span="12">
-        <el-card>
-          <template #header>近24小时交易量趋势</template>
-          <v-chart :option="txTrendOption" autoresize style="height: 300px" />
-        </el-card>
-      </el-col>
-
-      <!-- 区块 Gas 使用分布 -->
-      <el-col :span="12">
-        <el-card>
-          <template #header>区块 Gas 使用分布</template>
-          <v-chart :option="gasDistOption" autoresize style="height: 300px" />
-        </el-card>
-      </el-col>
-    </el-row>
-
-    <el-row :gutter="20" class="chart-row">
-      <!-- 节点负载仪表盘 -->
-      <el-col :span="8">
-        <el-card>
-          <template #header>节点负载</template>
-          <v-chart :option="nodeLoadOption" autoresize style="height: 250px" />
-        </el-card>
-      </el-col>
-
-      <!-- 交易类型占比 -->
-      <el-col :span="8">
-        <el-card>
-          <template #header>交易类型占比</template>
-          <v-chart :option="txTypeOption" autoresize style="height: 250px" />
-        </el-card>
-      </el-col>
-
-      <!-- 最近区块生成速度 -->
-      <el-col :span="8">
-        <el-card>
-          <template #header>区块生成速度（秒/块）</template>
-          <v-chart :option="blockSpeedOption" autoresize style="height: 250px" />
-        </el-card>
-      </el-col>
-    </el-row>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { getBlockList, getNodeInfo } from '@/api/webase'
+import { ElMessage } from 'element-plus'
 
-// ============ 数据 ============
-const blockNumber = ref(0)
-const totalTxCount = ref(0)
-const activeNodes = ref(0)
-const contractCount = ref(0)
-const txTrendData = ref<number[]>([])
-const gasUsedData = ref<number[]>([])
-let refreshTimer: number | null = null
+// 成功提示
+ElMessage.success('操作成功')
 
-// ============ 图表配置 ============
+// 错误提示
+ElMessage.error('操作失败，请重试')
 
-// 交易量趋势图（折线图）
-const txTrendOption = computed(() => ({
-  tooltip: { trigger: 'axis' },
-  xAxis: {
-    type: 'category',
-    data: Array.from({ length: 24 }, (_, i) => `${i}:00`)
-  },
-  yAxis: { type: 'value', name: '交易数' },
-  series: [{
-    data: txTrendData.value,
-    type: 'line',
-    smooth: true,
-    areaStyle: {
-      color: {
-        type: 'linear',
-        x: 0, y: 0, x2: 0, y2: 1,
-        colorStops: [
-          { offset: 0, color: 'rgba(64, 158, 255, 0.3)' },
-          { offset: 1, color: 'rgba(64, 158, 255, 0)' }
-        ]
-      }
-    }
-  }]
-}))
+// 警告提示
+ElMessage.warning('请输入用户名')
 
-// Gas 使用分布（柱状图）
-const gasDistOption = computed(() => ({
-  tooltip: { trigger: 'axis' },
-  xAxis: {
-    type: 'category',
-    data: Array.from({ length: 10 }, (_, i) => `区块 ${blockNumber.value - i}`)
-  },
-  yAxis: { type: 'value', name: 'Gas Used' },
-  series: [{
-    data: gasUsedData.value,
-    type: 'bar',
-    itemStyle: {
-      color: {
-        type: 'linear',
-        x: 0, y: 0, x2: 0, y2: 1,
-        colorStops: [
-          { offset: 0, color: '#67C23A' },
-          { offset: 1, color: '#E1F3D8' }
-        ]
-      }
-    }
-  }]
-}))
+// 普通提示
+ElMessage.info('数据加载中...')
 
-// 节点负载（仪表盘）
-const nodeLoadOption = computed(() => ({
-  series: [{
-    type: 'gauge',
-    startAngle: 180,
-    endAngle: 0,
-    min: 0,
-    max: 100,
-    splitNumber: 5,
-    axisLine: {
-      lineStyle: {
-        color: [
-          [0.3, '#67C23A'],
-          [0.7, '#E6A23C'],
-          [1, '#F56C6C']
-        ]
-      }
-    },
-    pointer: { icon: 'path://...' },
-    detail: {
-      formatter: '{value}%',
-      fontSize: 20
-    },
-    data: [{ value: activeNodes.value * 25, name: 'CPU 使用率' }]
-  }]
-}))
-
-// 交易类型占比（饼图）
-const txTypeOption = {
-  tooltip: { trigger: 'item' },
-  legend: { bottom: '0%' },
-  series: [{
-    type: 'pie',
-    radius: ['40%', '70%'],
-    center: ['50%', '45%'],
-    data: [
-      { value: 335, name: '合约调用' },
-      { value: 234, name: '转账交易' },
-      { value: 154, name: '合约部署' },
-      { value: 135, name: '存证上链' }
-    ],
-    emphasis: {
-      itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0,0,0,0.5)' }
-    }
-  }]
-}
-
-// 区块生成速度图表
-const blockSpeedOption = computed(() => ({
-  tooltip: { trigger: 'axis' },
-  xAxis: { type: 'category', data: ['1', '2', '3', '4', '5', '6', '7', '8'] },
-  yAxis: { type: 'value', name: '秒' },
-  series: [{
-    data: [2.5, 3.1, 2.8, 2.3, 2.9, 3.4, 2.6, 3.0],
-    type: 'line',
-    markLine: {
-      silent: true,
-      data: [{ yAxis: 3.0, label: { formatter: '平均 3s' } }]
-    }
-  }]
-}))
-
-// ============ 数据获取 ============
-const fetchDashboardData = async () => {
-  try {
-    const blocks = await getBlockList(1, 1, 10)
-    if (blocks && blocks.length > 0) {
-      blockNumber.value = blocks[0].blockNumber
-      totalTxCount.value = blocks.reduce((sum, b) => sum + b.transactionCount, 0)
-    }
-    const nodes = await getNodeInfo(1)
-    if (nodes) {
-      activeNodes.value = nodes.length
-    }
-  } catch (error) {
-    console.error('获取仪表盘数据失败:', error)
-  }
-}
-
-onMounted(() => {
-  fetchDashboardData()
-  // 每 10 秒刷新一次数据
-  refreshTimer = window.setInterval(fetchDashboardData, 10000)
-})
-
-onUnmounted(() => {
-  if (refreshTimer) {
-    clearInterval(refreshTimer)
-  }
+// 带配置的提示
+ElMessage({
+  type: 'success',
+  message: '保存成功',
+  duration: 3000,         // 显示时长（毫秒）
+  showClose: true,        // 显示关闭按钮
+  center: true            // 文字居中
 })
 </script>
 ```
 
+### 2. 完整的 try-catch-finally 模式
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { ElMessage } from 'element-plus'
+import { submitData } from '@/api/data'
+
+const loading = ref(false)
+
+const handleSubmit = async () => {
+  // 请求前：开启 loading
+  loading.value = true
+
+  try {
+    // 发送请求
+    const res = await submitData(formData)
+
+    // 判断返回结果
+    if (res.code === 0) {
+      ElMessage.success('提交成功')
+      // 成功后刷新列表
+      fetchList()
+    } else {
+      ElMessage.error(res.message || '提交失败')
+    }
+  } catch (error) {
+    // 异常捕获：记录日志 + 用户提示
+    console.error('提交失败:', error)
+    ElMessage.error('提交失败，请检查网络连接')
+  } finally {
+    // 无论成功还是失败，都关闭 loading
+    loading.value = false
+  }
+}
+</script>
+```
+
+### 3. 常见错误处理场景
+
+```vue
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+
+// ===== 场景一：列表获取失败 =====
+const fetchList = async () => {
+  loading.value = true
+  try {
+    const res = await getListApi(params)
+    if (res.code === 0) {
+      tableData.value = res.data.list || []
+    } else {
+      ElMessage.error(res.message || '获取列表失败')
+    }
+  } catch (error) {
+    console.error('获取列表失败:', error)
+    ElMessage.error('获取列表失败')
+  } finally {
+    loading.value = false
+  }
+}
+
+// ===== 场景二：删除确认弹窗 =====
+const handleDelete = async (row: any) => {
+  try {
+    await ElMessageBox.confirm(
+      `确定要删除"${row.name}"吗？`,
+      '确认删除',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }
+    )
+    // 用户确认删除
+    const res = await deleteApi(row.id)
+    if (res.code === 0) {
+      ElMessage.success('删除成功')
+      fetchList()
+    } else {
+      ElMessage.error(res.message || '删除失败')
+    }
+  } catch (error) {
+    // 用户取消也会进入 catch（抛出 cancel 错误）
+    if (error !== 'cancel') {
+      console.error('删除失败:', error)
+      ElMessage.error('删除失败')
+    }
+  }
+}
+
+// ===== 场景三：页面加载时的初始化 =====
+onMounted(() => {
+  fetchList()
+})
+</script>
+```
+
+### 4. 错误处理模式对比
+
+```typescript
+// ❌ 不好的写法：没有错误处理
+const fetchData = async () => {
+  const res = await getListApi()
+  tableData.value = res.data.list
+}
+
+// ❌ 不好的写法：catch 了但没给用户提示
+const fetchData = async () => {
+  try {
+    const res = await getListApi()
+    tableData.value = res.data.list
+  } catch (error) {
+    console.log(error)  // 用户不知道发生了什么
+  }
+}
+
+// ✅ 好的写法：完整的错误处理
+const fetchData = async () => {
+  loading.value = true
+  try {
+    const res = await getListApi()
+    if (res.code === 0) {
+      tableData.value = res.data.list || []
+    } else {
+      ElMessage.error(res.message || '获取列表失败')
+    }
+  } catch (error) {
+    console.error('获取列表失败:', error)
+    ElMessage.error('获取列表失败，请检查网络连接')
+  } finally {
+    loading.value = false
+  }
+}
+```
+
+### 5. ElMessageBox 常用弹窗
+
+```typescript
+import { ElMessageBox } from 'element-plus'
+
+// 确认弹窗
+await ElMessageBox.confirm('确定要执行此操作吗？', '提示', {
+  confirmButtonText: '确定',
+  cancelButtonText: '取消',
+  type: 'warning'
+})
+
+// 提示弹窗
+await ElMessageBox.alert('这是一条提示信息', '提示', {
+  confirmButtonText: '知道了'
+})
+
+// 输入弹窗
+const { value } = await ElMessageBox.prompt('请输入备注', '备注', {
+  confirmButtonText: '确定',
+  cancelButtonText: '取消'
+})
+```
+
 ## 重点内容
 
-- **`vue-echarts` 组件**：通过 `v-chart` 组件在 Vue 3 中使用 ECharts
-- **`autoresize` 属性**：图表自动响应父容器尺寸变化
-- **按需导入**：只导入需要使用的图表类型和组件，减小打包体积
-- **定时刷新**：使用 `setInterval` 定时获取最新数据并更新图表
-- **computed 属性**：图表的 option 使用 computed 实现响应式更新
-
-## 实际应用场景
-
-- 区块链仪表盘：展示区块高度、交易统计、节点状态
-- 交易监控：实时展示交易量趋势、Gas 价格变化
-- 合约分析：展示合约调用频率、Gas 消耗排行
-- 网络拓扑：展示联盟链节点连接关系
+- `ElMessage.success()` / `ElMessage.error()` 是最常用的用户反馈方式
+- try-catch 中 `console.error('描述:', error)` 记录完整错误信息，便于调试
+- `finally` 中关闭 loading 状态，无论成功失败都执行
+- API 响应中 `code` 为 0 判断成功，否则显示 `res.message`
+- 列表数据赋值时使用 `res.data.list || []` 做兜底，防止表格报错
 
 ## 注意事项
 
-- 按需导入 ECharts 组件可以显著减小打包体积（从 1MB+ 降到 200KB 左右）
-- 图表数据更新时，ECharts 默认会执行合并（merge），使用 `notMerge: true` 可以完全替换
-- 定时器在组件卸载时需要清除，避免内存泄漏
-- 图表容器必须有明确的宽高，否则图表无法正常渲染
+- `ElMessageBox.confirm` 的 catch 中包含用户取消的情况，需要区分处理
+- 不要在 catch 中默默吞掉错误，至少要 `console.error` 记录
+- 错误信息应简洁明了，不要暴露技术细节（如数据库字段名）
+- `loading` 是 `ref`，在模板中直接使用 `loading`，在 script 中需要 `loading.value`
 
 ## 常见误区
 
-- 误区：全量导入 ECharts 导致打包体积过大
-- 误区：图表 option 不是响应式的，数据变化后图表不更新
-- 误区：忘记在 `onUnmounted` 中清除定时器
-- 误区：图表容器没有设置高度导致不显示
-
-## 关联知识点
-
-- [Element Plus 组件库](/knowledge/element-plus)
-- [Axios 封装与 API 对接](/knowledge/axios-api-encapsulation)
-- [Vue 3 Composition API](/knowledge/vue3-composition-api)
+- 误区：API 调用不写 try-catch，网络异常导致页面白屏
+- 误区：只写 `ElMessage.error` 不写 `console.error`，调试时找不到错误原因
+- 误区：在 `ElMessageBox.confirm` 的 catch 中一律当错误处理，忽略了用户取消
+- 误区：多个 API 调用共用一个 `loading`，导致状态混乱
 
 ## 官方资源扩展
 
-- [ECharts 官方文档](https://echarts.apache.org/zh/index.html) - Apache ECharts 完整中文文档，最佳学习资源
-- [ECharts 示例集](https://echarts.apache.org/examples/zh/index.html) - 数百个图表示例，可直接参考使用
-- [vue-echarts GitHub](https://github.com/ecomfe/vue-echarts) - Vue 3 ECharts 封装组件文档
-- [ECharts 按需引入指南](https://echarts.apache.org/handbook/zh/basics/import) - 官方按需导入教程，减小打包体积
+- [Element Plus Message 消息提示](https://element-plus.org/zh-CN/component/message.html) - 消息提示完整文档，最佳学习资源
+- [Element Plus MessageBox 弹窗](https://element-plus.org/zh-CN/component/message-box.html) - 确认弹窗文档
+- [MDN - try...catch](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/try...catch) - JS 异常处理文档
+- [MDN - console.error](https://developer.mozilla.org/zh-CN/docs/Web/API/console/error) - 控制台错误输出
