@@ -11,6 +11,7 @@ export default defineConfig({
     
     nav: [
       { text: '首页', link: '/' },
+      { text: '🏆 金砖大赛区块链', link: '/knowledge/blockchain-frontend-overview' },
       { text: 'Vue 2', link: '/knowledge/vue-instance' },
       { text: 'Vue 3', link: '/knowledge/vue3-composition-api' },
       { text: 'axios', link: '/knowledge/axios-http' },
@@ -22,8 +23,25 @@ export default defineConfig({
     
     sidebar: [
       {
-        text: 'Vue 3 进阶',
+        text: '🏆 金砖大赛 - 区块链前端',
         collapsed: false,
+        items: [
+          { text: '区块链前端开发概述', link: '/knowledge/blockchain-frontend-overview' },
+          { text: 'Vue 3 + TS 项目搭建', link: '/knowledge/vue3-ts-project-setup' },
+          { text: 'Element Plus 组件库', link: '/knowledge/element-plus' },
+          { text: 'Vue Router 4 路由', link: '/knowledge/vue-router4-advanced' },
+          { text: 'Pinia 状态管理', link: '/knowledge/pinia' },
+          { text: 'Axios 封装与 API 对接', link: '/knowledge/axios-api-encapsulation' },
+          { text: 'Web3.js 区块链交互', link: '/knowledge/web3-blockchain-interaction' },
+          { text: '智能合约前端调用', link: '/knowledge/smart-contract-frontend' },
+          { text: '区块链数据可视化', link: '/knowledge/blockchain-data-visualization' },
+          { text: '表单设计与验证', link: '/knowledge/form-validation' },
+          { text: '前端部署与优化', link: '/knowledge/frontend-deployment' }
+        ]
+      },
+      {
+        text: 'Vue 3 进阶',
+        collapsed: true,
         items: [
           { text: 'Composition API', link: '/knowledge/vue3-composition-api' },
           { text: '&lt;script setup&gt; 语法糖', link: '/knowledge/vue3-script-setup' },
