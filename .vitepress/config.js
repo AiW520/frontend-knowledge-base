@@ -39,6 +39,61 @@ export default defineConfig({
         ]
       },
       {
+        text: '🔷 金砖大赛 - 区块链后端',
+        collapsed: false,
+        items: [
+          { text: '📖 后端开发总览', link: '/knowledge/blockchain-backend-overview' },
+          {
+            text: '🔧 区块链平台运维',
+            collapsed: true,
+            items: [
+              { text: 'FISCO BCOS 区块链搭建', link: '/knowledge/fisco-bcos-deployment' },
+              { text: '区块链控制台 Console', link: '/knowledge/blockchain-console' },
+              { text: 'WeBASE 平台搭建', link: '/knowledge/webase-platform' },
+              { text: '区块链节点监控', link: '/knowledge/blockchain-node-monitor' },
+              { text: 'Caliper 压力测试', link: '/knowledge/caliper-stress-test' }
+            ]
+          },
+          {
+            text: '📝 智能合约开发与测试',
+            collapsed: true,
+            items: [
+              { text: 'Solidity 基础语法', link: '/knowledge/solidity-basics' },
+              { text: 'Solidity 进阶：存储分离', link: '/knowledge/solidity-storage-pattern' },
+              { text: 'Solidity 进阶：金融协议', link: '/knowledge/solidity-finance' },
+              { text: 'Hardhat 测试框架', link: '/knowledge/hardhat-testing' },
+              { text: 'Truffle + Ganache', link: '/knowledge/truffle-ganache' },
+              { text: 'Foundry 测试框架', link: '/knowledge/foundry-testing' },
+              { text: '智能合约安全', link: '/knowledge/smart-contract-security' },
+              { text: 'Solana 合约开发', link: '/knowledge/solana-contract' }
+            ]
+          },
+          {
+            text: '☕ Spring Boot 后端开发',
+            collapsed: true,
+            items: [
+              { text: '项目搭建与配置', link: '/knowledge/springboot-project-setup' },
+              { text: 'MyBatis-Plus 实体与 Mapper', link: '/knowledge/mybatis-plus-entity' },
+              { text: 'MyBatis-Plus Service 层', link: '/knowledge/mybatis-plus-service' },
+              { text: '统一响应与异常处理', link: '/knowledge/springboot-unified-response' },
+              { text: '登录认证开发', link: '/knowledge/springboot-login-auth' },
+              { text: '登录拦截器', link: '/knowledge/springboot-login-interceptor' },
+              { text: '业务 CRUD 实战（上）', link: '/knowledge/springboot-crud-1' },
+              { text: '业务 CRUD 实战（下）', link: '/knowledge/springboot-crud-2' },
+              { text: '整合 WeBASE-Front', link: '/knowledge/springboot-webase-integration' },
+              { text: 'Postman 接口测试', link: '/knowledge/postman-api-testing' }
+            ]
+          },
+          {
+            text: '📋 测试文档编写',
+            collapsed: true,
+            items: [
+              { text: '接口文档与测试用例', link: '/knowledge/api-doc-test-case' }
+            ]
+          }
+        ]
+      },
+      {
         text: 'Vue 3 进阶',
         collapsed: true,
         items: [

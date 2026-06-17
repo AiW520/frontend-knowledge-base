@@ -21,6 +21,49 @@
 
 ---
 
+## 🔷 金砖大赛 - 区块链后端（全栈训练）
+
+**覆盖区块链应用开发与运维赛项的全部后端考点（85分）**，包含区块链平台运维、智能合约开发与测试、Spring Boot 后端开发、测试文档编写四大模块，共 25 个知识点。每个知识点提供同类场景的完整代码示例和官方最佳学习资源。
+
+### 🔧 区块链平台运维（20分）
+
+- [后端开发总览](/knowledge/blockchain-backend-overview) - 赛项后端全景、模块分值、技术栈
+- [FISCO BCOS 区块链搭建](/knowledge/fisco-bcos-deployment) - 搭链脚本、节点启动、SDK证书
+- [区块链控制台 Console](/knowledge/blockchain-console) - 合约部署、交易查询、命令行操作
+- [WeBASE 平台搭建](/knowledge/webase-platform) - 节点前置、管理平台、可视化运维
+- [区块链节点监控](/knowledge/blockchain-node-monitor) - 节点状态、区块同步、告警配置
+- [Caliper 压力测试](/knowledge/caliper-stress-test) - 吞吐量、延迟、TPS测试报告
+
+### 📝 智能合约开发与测试（35分）
+
+- [Solidity 基础语法](/knowledge/solidity-basics) - 数据类型、函数、修饰器、事件
+- [Solidity 进阶：存储分离](/knowledge/solidity-storage-pattern) - mapping、struct、存储模式
+- [Solidity 进阶：金融协议](/knowledge/solidity-finance) - 转账、质押、计息
+- [Hardhat 测试框架](/knowledge/hardhat-testing) - 合约编译、部署脚本、测试用例
+- [Truffle + Ganache](/knowledge/truffle-ganache) - 迁移脚本、本地测试网
+- [Foundry 测试框架](/knowledge/foundry-testing) - forge 测试、cast 交互
+- [智能合约安全](/knowledge/smart-contract-security) - 重入攻击、溢出、访问控制
+- [Solana 合约开发](/knowledge/solana-contract) - Rust Anchor、PDA、跨链概念
+
+### ☕ Spring Boot 后端开发（20分）
+
+- [项目搭建与配置](/knowledge/springboot-project-setup) - Maven、配置文件、启动类
+- [MyBatis-Plus 实体与 Mapper](/knowledge/mybatis-plus-entity) - 实体映射、BaseMapper、CRUD
+- [MyBatis-Plus Service 层](/knowledge/mybatis-plus-service) - IService、ServiceImpl、业务封装
+- [统一响应与异常处理](/knowledge/springboot-unified-response) - R类、全局异常、状态码
+- [登录认证开发](/knowledge/springboot-login-auth) - JWT、密码加密、登录接口
+- [登录拦截器](/knowledge/springboot-login-interceptor) - HandlerInterceptor、Token校验
+- [业务 CRUD 实战（上）](/knowledge/springboot-crud-1) - 分页查询、条件筛选
+- [业务 CRUD 实战（下）](/knowledge/springboot-crud-2) - 新增修改删除、关联查询
+- [整合 WeBASE-Front](/knowledge/springboot-webase-integration) - 合约调用、交易上链
+- [Postman 接口测试](/knowledge/postman-api-testing) - 请求集合、环境变量、断言
+
+### 📋 测试文档编写（10分）
+
+- [接口文档与测试用例](/knowledge/api-doc-test-case) - Swagger、接口文档、测试用例模板
+
+---
+
 ## 知识来源
 
 本知识库所有内容均来源于以下项目代码：
