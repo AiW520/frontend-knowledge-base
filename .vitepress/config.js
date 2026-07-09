@@ -27,6 +27,8 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: '赛项概述与赛程', link: '/knowledge/blockchain-frontend-overview' },
+          { text: '前端竞赛考点学习路径', link: '/knowledge/frontend-competition-roadmap' },
+          { text: '前端填空题型训练', link: '/knowledge/frontend-fill-blank-training' },
           { text: 'Vue 3 登录表单开发', link: '/knowledge/vue3-ts-project-setup' },
           { text: 'Vue 3 数据列表与表格', link: '/knowledge/element-plus' },
           { text: 'Vue Router 4 路由导航', link: '/knowledge/vue-router4-advanced' },
@@ -58,6 +60,8 @@ export default defineConfig({
             text: '📝 智能合约开发与测试',
             collapsed: true,
             items: [
+              { text: '智能合约考点学习路径', link: '/knowledge/smart-contract-competition-roadmap' },
+              { text: '智能合约填空题型训练', link: '/knowledge/smart-contract-fill-blank-training' },
               { text: 'Solidity 基础语法', link: '/knowledge/solidity-basics' },
               { text: 'Solidity 进阶：存储分离', link: '/knowledge/solidity-storage-pattern' },
               { text: 'Solidity 进阶：金融协议', link: '/knowledge/solidity-finance' },
@@ -72,6 +76,8 @@ export default defineConfig({
             text: '☕ Spring Boot 后端开发',
             collapsed: true,
             items: [
+              { text: '后端竞赛考点学习路径', link: '/knowledge/backend-competition-roadmap' },
+              { text: '后端填空题型训练', link: '/knowledge/backend-fill-blank-training' },
               { text: '项目搭建与配置', link: '/knowledge/springboot-project-setup' },
               { text: 'MyBatis-Plus 实体与 Mapper', link: '/knowledge/mybatis-plus-entity' },
               { text: 'MyBatis-Plus Service 层', link: '/knowledge/mybatis-plus-service' },
