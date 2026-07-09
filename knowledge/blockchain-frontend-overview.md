@@ -1,96 +1,77 @@
-# 区块链前端开发概述（金砖大赛专项）
+# 区块链前端能力总览
 
-## 竞赛背景
+## 定位
 
-**一带一路暨金砖国家技能发展与技术创新大赛——区块链应用开发与运维赛项**是金砖国家间技能竞赛的重要组成部分。2025年已举办第四届，2026年将举办第五届。
+本页是前端训练总览。主线聚焦 Vue3 项目级挖空补全，后端、合约、链平台内容只作为前端联调背景理解。
 
-### 竞赛基本信息
+示例和说明均为泛化整理，不包含非公开训练材料细节。
 
-| 项目 | 说明 |
-|------|------|
-| 主办单位 | 金砖国家工商理事会中方理事会、一带一路暨金砖国家技能发展国际联盟 |
-| 竞赛形式 | 团体赛（2人/队），设高职组、本科组、国际组 |
-| 竞赛时长 | 1天（含开幕式、竞赛、闭幕式） |
-| 竞赛总分 | 100分 |
-| 竞赛平台 | FISCO BCOS + WeBASE + Spring Boot + Vue.js |
+## 前端要完成的闭环
 
-## 竞赛模块与分值
-
-| 模块 | 内容 | 分值 |
-|------|------|------|
-| **第一部分** | 区块链平台运维 | 20分 |
-| **第二部分** | 智能合约开发与测试 | 35分 |
-| **第三部分** | 区块链应用系统开发 | 40分 |
-| **第四部分** | 职业素养 | 5分 |
-
-### 第三部分详解（与前端直接相关）
-
-| 子题 | 内容 | 分值 |
-|------|------|------|
-| 第1题 | 后端功能开发（Spring Boot） | 20分 |
-| **第2题** | **前端功能开发（Vue.js）** | **10分** |
-| 第3题 | 系统设计与测试文档 | 10分 |
-
-## 前端考核方式
-
-前端考核采用 **「填空式」** 命题方式：
-
-- 组委会提供一套完整的 Vue 3 + TypeScript 项目模板
-- 代码中预留 `// 选手填写部分` 注释标记
-- 选手需要在这些位置补充正确的代码逻辑
-- 考核内容涵盖：**表单验证、API调用、数据绑定、列表渲染、路由跳转、文件下载、错误处理**
-
-## 前端技术栈
-
-```
-Vue 3 + TypeScript + Vite
-├── Element Plus        # UI 组件库（表格、表单、弹窗、消息提示）
-├── Pinia               # 状态管理
-├── Vue Router 4        # 路由管理
-├── Axios               # HTTP 请求库
-└── WeBASE-Front API    # 区块链中间件接口
+```text
+登录鉴权 -> 获取数据 -> 页面展示 -> 用户操作 -> 接口提交 -> 结果反馈 -> 截图交付
 ```
 
-## 竞赛环境
+前端选手最重要的能力不是“写一个好看的页面”，而是在已有工程里快速补齐能运行、能联调、能展示结果的代码。
 
-- **操作系统**：Windows + WSL（Windows Subsystem for Linux）
-- **开发工具**：VSCode
-- **区块链平台**：FISCO BCOS 联盟链
-- **中间件**：WeBASE-Front（节点前置服务）、WeBASE-Node-Manager、WeBASE-Web
-- **后端框架**：Spring Boot
-- **前端框架**：Vue 3 + TypeScript + Vite
+## 能力结构
 
-## 前端知识体系
+| 模块 | 前端要掌握什么 |
+| --- | --- |
+| Vue3 工程 | `main.ts`、路由、状态管理、组件目录、样式入口 |
+| 页面模板 | 列表、卡片、详情、状态标签、操作按钮 |
+| 表单交互 | 输入绑定、校验、弹窗、提交、重置 |
+| API 调用 | 统一请求、API 映射、请求参数、响应字段 |
+| 登录鉴权 | token 保存、用户信息、路由跳转、请求头 |
+| 文件处理 | 上传、下载、Blob、对象 URL 释放 |
+| 链上证据 | 交易哈希、区块高度、合约地址、部署状态 |
+| 交付检查 | 页面截图、成功提示、异常提示、空状态 |
 
-根据往年赛题规律，前端考核核心能力分为以下 10 个知识点：
+## 挖空训练重点
 
-| 序号 | 知识点 | 考核能力 |
-|------|--------|---------|
-| 1 | [Vue 3 登录表单开发](/knowledge/vue3-ts-project-setup) | 表单双绑、非空验证、API调用、路由跳转 |
-| 2 | [Vue 3 数据列表与表格](/knowledge/element-plus) | Element Plus 表格、分页、数据获取、loading |
-| 3 | [Vue Router 4 路由导航](/knowledge/vue-router4-advanced) | 路由跳转、传参、导航守卫 |
-| 4 | [Axios 封装与 API 调用](/knowledge/axios-api-encapsulation) | 拦截器、统一错误处理、请求封装 |
-| 5 | [Vue 3 文件下载功能](/knowledge/web3-blockchain-interaction) | Blob流、a标签下载、下载状态提示 |
-| 6 | [Element Plus 表单验证](/knowledge/smart-contract-frontend) | el-form验证、自定义校验规则 |
-| 7 | [错误处理与用户反馈](/knowledge/blockchain-data-visualization) | ElMessage、异常捕获、loading状态 |
-| 8 | [项目配置与环境搭建](/knowledge/form-validation) | vite.config.ts、环境变量、代理 |
-| 9 | [综合实战：完整页面开发](/knowledge/frontend-deployment) | 数据流：获取→展示→交互→反馈 |
-| 10 | [api规范与调用](/knowledge/axios-api-encapsulation) | uriCode、请求参数、响应结构 |
+### 小空
 
-## 学习路径建议
+- `:key=""`
+- `{{ }}`
+- `v-if=""`
+- `:class=""`
+- `@click=""`
+- `v-model:value=""`
 
-1. 先掌握 **Vue 3 + TypeScript 基础**（模板语法、响应式、组件通信）
-2. 熟悉 **Element Plus 组件**（表格、表单、弹窗、消息提示）
-3. 掌握 **Axios 封装**（请求拦截、响应拦截、错误处理）
-4. 理解 **Vue Router 4**（路由配置、编程式导航、路由守卫）
-5. 综合实战 —— 完成一个完整的列表页面（获取数据 → 展示表格 → 交互反馈）
+小空通常考上下文阅读：当前循环变量叫什么、表单对象叫什么、状态字段在哪里。
 
-## 官方学习资源
+### 大空
 
-- [Vue 3 官方文档](https://cn.vuejs.org/) - Vue 3 完整中文文档，最佳入门资源
-- [Element Plus 官方文档](https://element-plus.org/zh-CN/) - 每个组件都有完整示例
-- [Vue Router 4 官方文档](https://router.vuejs.org/zh/) - 路由导航完整指南
-- [Axios 官方文档](https://axios-http.com/zh/docs/intro) - HTTP 请求库中文文档
-- [TypeScript 官方手册](https://www.typescriptlang.org/zh/docs/handbook/intro.html) - TS 入门指南
-- [Vite 官方中文文档](https://cn.vitejs.dev/) - 构建工具完整指南
-- [金砖大赛官网](http://www.brskills.com) - 大赛官方通知与技术文件
+- 登录函数。
+- 列表分页函数。
+- 详情查询函数。
+- 文件下载函数。
+- 页面卡片区域。
+- 结果展示区域。
+
+大空通常考完整链路：校验、请求、赋值、提示、loading、异常处理。
+
+## 前端学习路径
+
+1. [前端竞赛考点学习路径](/knowledge/frontend-competition-roadmap)
+2. [Vue3 项目级挖空训练营](/knowledge/vue3-project-blank-camp)
+3. [前端填空题型训练](/knowledge/frontend-fill-blank-training)
+4. [Axios 封装与 API 调用](/knowledge/axios-api-encapsulation)
+5. [Vue 3 数据列表与表格](/knowledge/element-plus)
+6. [前端联调最小知识](/knowledge/frontend-fullstack-context)
+7. [综合实战：完整页面开发](/knowledge/frontend-deployment)
+
+## 前端联调边界
+
+前端不需要深入实现后端或合约，但必须看懂这些信息：
+
+- 登录接口返回 token 的位置。
+- 列表接口返回数组和总数的位置。
+- 详情接口需要的 id 或业务编号。
+- 下载接口是否返回 Blob。
+- 链上结果字段如何展示。
+- token 失效时如何跳转登录。
+
+## Vue2 说明
+
+Vue2 相关内容保留为省赛补充学习。当前主线以 Vue3、Vite、TypeScript、组合式 API、统一请求封装和项目级挖空训练为核心。

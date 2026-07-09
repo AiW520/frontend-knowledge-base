@@ -1,4 +1,4 @@
-<!-- 知识点名称 -->
+﻿<!-- 知识点名称 -->
 # Vue 事件处理
 
 <!-- 知识简介 -->
@@ -39,7 +39,7 @@ methods: {
 - 可以在事件处理中修改 data、调用其他方法
 
 <!-- 关键代码示例 -->
-来源：`frontend/html/signature.html` 第 60-66 行
+示例来源：通用训练工程抽象
 ```html
 <button type="button" class="btn btn-info btn-lg" @click="upload">上传文档</button>
 <button type="button" class="btn btn-success btn-lg" @click="signature">文档签章</button>
@@ -67,9 +67,9 @@ methods: {
 - [表单验证](/knowledge/form-validation)
 
 <!-- 资料来源 -->
-- 来源文件：`frontend/html/login.html`、`frontend/html/register.html`
-- 来源文件：`frontend/html/signature.html`、`frontend/html/verify.html`
-- 来源文件：`供应链—front/src/views/Login.vue`
+- 示例来源：通用训练工程抽象、`frontend/html/register.html`
+- 示例来源：通用训练工程抽象、`frontend/html/verify.html`
+- 示例来源：通用训练工程抽象
 
 <!-- 官方资源扩展 -->
 - [Vue 2 官方文档 - 事件处理](https://v2.vuejs.org/v2/guide/events.html)

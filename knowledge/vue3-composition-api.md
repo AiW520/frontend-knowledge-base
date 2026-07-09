@@ -1,4 +1,4 @@
-# Vue 3 Composition API
+﻿# Vue 3 Composition API
 
 ## 知识简介
 
@@ -14,7 +14,7 @@ Composition API 是 Vue 3 引入的组合式 API，通过 `setup()` 函数和响
 
 ## 详细讲解
 
-在 jinzhuan-project-web 项目中，所有视图和组件都使用 Composition API 编写。与 Vue 2 的 Options API 不同，Composition API 将相关逻辑放在一起，而不是分散在 `data`、`methods`、`computed` 等选项中。
+在 Vue3 项目级训练工程中，所有视图和组件都使用 Composition API 编写。与 Vue 2 的 Options API 不同，Composition API 将相关逻辑放在一起，而不是分散在 `data`、`methods`、`computed` 等选项中。
 
 **Vue 2 Options API 的问题**：当组件变得复杂时，同一功能的代码分散在不同选项中（data、methods、computed），难以维护。
 
@@ -31,7 +31,7 @@ Composition API 是 Vue 3 引入的组合式 API，通过 `setup()` 函数和响
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/src/hooks/useForm.ts`
+示例来源：通用训练工程抽象
 
 ```javascript
 import { reactive, ref, watch } from 'vue'
@@ -93,10 +93,10 @@ export const useList = (uriCode, immediate = true, query) => {
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`src/hooks/useForm.ts`（useList 组合函数）
-- 来源文件：`src/App.vue`（watch 监听路由）
-- 来源文件：`src/components/Layout/layout.vue`（ref、computed、onMounted）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（useList 组合函数）
+- 示例来源：通用训练工程抽象（watch 监听路由）
+- 示例来源：通用训练工程抽象（ref、computed、onMounted）
 
 ## 官方资源扩展
 

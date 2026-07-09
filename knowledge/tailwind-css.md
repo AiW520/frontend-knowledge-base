@@ -1,8 +1,8 @@
-# Tailwind CSS
+﻿# Tailwind CSS
 
 ## 知识简介
 
-Tailwind CSS 是一个以原子化 CSS 类为核心的 CSS 框架，通过在 HTML 中直接使用预定义的 class（如 `flex`、`bg-blue-500`、`p-4`）来构建界面，无需编写自定义 CSS。jinzhuan-project-web 项目同时使用 Tailwind CSS 和 Windi CSS。
+Tailwind CSS 是一个以原子化 CSS 类为核心的 CSS 框架，通过在 HTML 中直接使用预定义的 class（如 `flex`、`bg-blue-500`、`p-4`）来构建界面，无需编写自定义 CSS。Vue3 项目级训练工程同时使用 Tailwind CSS 和 Windi CSS。
 
 ## 核心概念
 
@@ -14,7 +14,7 @@ Tailwind CSS 是一个以原子化 CSS 类为核心的 CSS 框架，通过在 HT
 
 ## 详细讲解
 
-在 jinzhuan-project-web 项目中，Tailwind CSS 配合 `tailwindcss-animate` 插件实现动画，配置文件（`tailwind.config.js`）中定义了基于 CSS 变量的设计系统：
+在 Vue3 项目级训练工程中，Tailwind CSS 配合 `tailwindcss-animate` 插件实现动画，配置文件（`tailwind.config.js`）中定义了基于 CSS 变量的设计系统：
 
 ```javascript
 colors: {
@@ -45,7 +45,7 @@ Tailwind CSS 的核心优势：
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/tailwind.config.js`
+示例来源：通用训练工程抽象
 
 ```javascript
 export default {
@@ -105,10 +105,10 @@ export default {
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`tailwind.config.js`（完整配置）
-- 来源文件：`windi.config.ts`（Windi CSS 配置）
-- 来源文件：`src/assets/css/web3-theme.scss`（CSS 变量主题）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（完整配置）
+- 示例来源：通用训练工程抽象（Windi CSS 配置）
+- 示例来源：通用训练工程抽象（CSS 变量主题）
 
 ## 官方资源扩展
 

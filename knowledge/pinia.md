@@ -1,4 +1,4 @@
-# Pinia 状态管理
+﻿# Pinia 状态管理
 
 ## 知识简介
 
@@ -14,7 +14,7 @@ Pinia 是 Vue 3 官方推荐的状态管理库，替代 Vuex。通过 `defineSto
 
 ## 详细讲解
 
-jinzhuan-project-web 项目使用 Pinia 替代 Vuex，管理全局用户信息和 loading 状态。
+Vue3 项目级训练工程使用 Pinia 替代 Vuex，管理全局用户信息和 loading 状态。
 
 项目中的 store 配置（`src/store/index.ts`）使用 `createPinia()` 创建 Pinia 实例，并通过 `piniaPluginPersistedstate` 插件实现持久化，用户信息会保存在 localStorage/sessionStorage 中。
 
@@ -35,7 +35,7 @@ Pinia 相比 Vuex 的优势：
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/src/store/app.ts`
+示例来源：通用训练工程抽象
 
 ```javascript
 import { defineStore } from 'pinia'
@@ -66,7 +66,7 @@ export default defineStore({
 })
 ```
 
-来源：`jinzhuan-project-web/src/store/index.ts`
+示例来源：通用训练工程抽象
 
 ```javascript
 import { createPinia } from 'pinia'
@@ -106,12 +106,12 @@ export default store
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`src/store/index.ts`（Pinia 实例创建与持久化插件配置）
-- 来源文件：`src/store/app.ts`（appStore 定义）
-- 来源文件：`src/store/interface.ts`（类型定义）
-- 来源文件：`src/main.ts`（Pinia 注册到 Vue）
-- 来源文件：`src/components/Layout/layout.vue`（store 使用示例）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（Pinia 实例创建与持久化插件配置）
+- 示例来源：通用训练工程抽象（appStore 定义）
+- 示例来源：通用训练工程抽象（类型定义）
+- 示例来源：通用训练工程抽象（Pinia 注册到 Vue）
+- 示例来源：通用训练工程抽象（store 使用示例）
 
 ## 官方资源扩展
 

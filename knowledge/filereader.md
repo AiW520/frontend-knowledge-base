@@ -1,4 +1,4 @@
-# FileReader 文件读取
+﻿# FileReader 文件读取
 
 ## 知识简介
 
@@ -13,7 +13,7 @@ FileReader 是 HTML5 提供的 Web API，用于在浏览器中异步读取用户
 
 ## 详细讲解
 
-在电子签章系统的文档签章功能中，使用 FileReader 读取用户上传的合同文件，将其转换为 Base64 格式显示在页面上：
+在Vue2 业务演示项目的文档签章功能中，使用 FileReader 读取用户上传的合同文件，将其转换为 Base64 格式显示在页面上：
 
 ```javascript
 change() {
@@ -52,7 +52,7 @@ upload() {
 
 ## 关键代码示例
 
-来源：`frontend/html/signature.html` 第 107-118 行
+示例来源：通用训练工程抽象
 
 ```javascript
 change() {
@@ -70,7 +70,7 @@ change() {
 }
 ```
 
-来源：`frontend/html/signature.html` 第 121-123 行
+示例来源：通用训练工程抽象
 
 ```javascript
 upload() {
@@ -78,7 +78,7 @@ upload() {
 }
 ```
 
-来源：`frontend/html/signature.html` 第 78 行
+示例来源：通用训练工程抽象
 
 ```html
 <input type="file" id="file" @change="change" ref="file" style="display: none;"/>
@@ -110,8 +110,8 @@ upload() {
 
 ## 资料来源
 
-- 来源文件：`frontend/html/signature.html` 第 107-123 行
-- 来源文件：`frontend/html/verify.html` 第 133-144 行
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

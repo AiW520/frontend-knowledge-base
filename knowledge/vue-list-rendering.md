@@ -1,4 +1,4 @@
-<!-- 知识点名称 -->
+﻿<!-- 知识点名称 -->
 # Vue 列表渲染
 
 <!-- 知识简介 -->
@@ -41,7 +41,7 @@ mounted() {
 - 可以使用 `in` 或 `of` 作为分隔符
 
 <!-- 关键代码示例 -->
-来源：`frontend/html/record.html` 第 70-96 行
+示例来源：通用训练工程抽象
 ```html
 <tr v-for="(record,index) of records" :key="index">
     <td>{{record.id}}</td>
@@ -83,8 +83,8 @@ mounted() {
 - [axios HTTP 请求](/knowledge/axios-http)
 
 <!-- 资料来源 -->
-- 来源文件：`frontend/html/record.html`
-- 来源文件：`供应链—front/src/views/Home.vue`
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 <!-- 官方资源扩展 -->
 - [Vue 2 官方文档 - 列表渲染](https://v2.vuejs.org/v2/guide/list.html)

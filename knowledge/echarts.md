@@ -1,8 +1,8 @@
-# ECharts 数据可视化
+﻿# ECharts 数据可视化
 
 ## 知识简介
 
-ECharts 是百度开源的数据可视化图表库，提供折线图、柱状图、饼图、散点图、地图等丰富的图表类型。jinzhuan-project-web 项目使用 ECharts 5 实现数据可视化。
+ECharts 是百度开源的数据可视化图表库，提供折线图、柱状图、饼图、散点图、地图等丰富的图表类型。Vue3 项目级训练工程使用 ECharts 5 实现数据可视化。
 
 ## 核心概念
 
@@ -16,7 +16,7 @@ ECharts 是百度开源的数据可视化图表库，提供折线图、柱状图
 
 ## 详细讲解
 
-在 jinzhuan-project-web 项目中，ECharts 作为依赖直接引入（`echarts: "^5.5.0"`），用于在仪表盘页面展示数据统计图表。
+在 Vue3 项目级训练工程中，ECharts 作为依赖直接引入（`echarts: "^5.5.0"`），用于在仪表盘页面展示数据统计图表。
 
 ECharts 的典型使用流程：
 1. 准备 DOM 容器
@@ -44,7 +44,7 @@ ECharts 在 Vite 中的优化配置：在 `package.json` 中配置 `optimizeDeps
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/src/components/Layout/layout.vue`
+示例来源：通用训练工程抽象
 
 ECharts 在项目的 vue3-count-to 插件中用于数字滚动效果，在仪表盘中展示统计数据。
 
@@ -100,9 +100,9 @@ window.addEventListener('resize', () => chart.resize())
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`package.json`（ECharts 依赖和预构建配置）
-- 来源文件：`src/views/home/`（仪表盘页面）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（ECharts 依赖和预构建配置）
+- 示例来源：通用训练工程抽象（仪表盘页面）
 
 ## 官方资源扩展
 

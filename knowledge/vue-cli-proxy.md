@@ -1,4 +1,4 @@
-# Vue CLI 开发代理
+﻿# Vue CLI 开发代理
 
 ## 知识简介
 
@@ -13,7 +13,7 @@ Vue CLI 的开发服务器提供代理功能，通过 `vue.config.js` 中的 `de
 
 ## 详细讲解
 
-在供应链金融项目中，前端运行在 `localhost:8020`，后端 API 运行在 `localhost:8080`。为了解决跨域问题，配置了代理：
+在Vue2 业务演示项目中，前端运行在 `localhost:8020`，后端 API 运行在 `localhost:8080`。为了解决跨域问题，配置了代理：
 
 ```javascript
 const vueConfig = {
@@ -56,7 +56,7 @@ axios.defaults.baseURL = '/api'
 
 ## 关键代码示例
 
-来源：`供应链—front/vue.config.js` 第 1-16 行
+示例来源：通用训练工程抽象
 
 ```javascript
 const vueConfig = {
@@ -76,7 +76,7 @@ const vueConfig = {
 module.exports = vueConfig
 ```
 
-来源：`供应链—front/src/main.js` 第 13 行
+示例来源：通用训练工程抽象
 
 ```javascript
 axios.defaults.baseURL = '/api'
@@ -106,8 +106,8 @@ axios.defaults.baseURL = '/api'
 
 ## 资料来源
 
-- 来源文件：`供应链—front/vue.config.js`
-- 来源文件：`供应链—front/src/main.js` 第 13 行
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

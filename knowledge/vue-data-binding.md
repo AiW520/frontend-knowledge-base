@@ -1,4 +1,4 @@
-<!-- 知识点名称 -->
+﻿<!-- 知识点名称 -->
 # Vue 数据绑定
 
 <!-- 知识简介 -->
@@ -32,7 +32,7 @@ axios.post("http://localhost/user/login", this.user).then(response => { ... })
 - 数据驱动视图，避免手动操作 DOM
 
 <!-- 关键代码示例 -->
-来源：`frontend/html/register.html` 第 32-63 行
+示例来源：通用训练工程抽象
 ```html
 <input type="text" class="form-control" placeholder="用户名(必填)" 
     v-model="user.username">
@@ -62,9 +62,9 @@ axios.post("http://localhost/user/login", this.user).then(response => { ... })
 - [事件处理](/knowledge/vue-event-handling)
 
 <!-- 资料来源 -->
-- 来源文件：`frontend/html/login.html`
-- 来源文件：`frontend/html/register.html`
-- 来源文件：`供应链—front/src/views/Login.vue`
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 <!-- 官方资源扩展 -->
 - [Vue 2 官方文档 - 表单输入绑定](https://v2.vuejs.org/v2/guide/forms.html)

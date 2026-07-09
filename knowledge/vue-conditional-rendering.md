@@ -1,4 +1,4 @@
-<!-- 知识点名称 -->
+﻿<!-- 知识点名称 -->
 # Vue 条件渲染
 
 <!-- 知识简介 -->
@@ -45,13 +45,13 @@ methods: {
 - `v-show` 不支持 `template` 元素
 
 <!-- 关键代码示例 -->
-来源：`frontend/html/signature.html` 第 79-80 行
+示例来源：通用训练工程抽象
 ```html
 <img v-show="demoImg" src="../images/contract.jpg" style="width: 800px;opacity: 0.3;" @click="upload" />
 <img v-show="posterImg" :src="contract" alt="合约" />
 ```
 
-来源：`frontend/html/login.html` 第 23 行
+示例来源：通用训练工程抽象
 ```html
 <div class="alert alert-success" v-show="tip" role="alert">{{msg}}</div>
 ```
@@ -75,9 +75,9 @@ methods: {
 - [模板语法](/knowledge/vue-template-syntax)
 
 <!-- 资料来源 -->
-- 来源文件：`frontend/html/login.html`
-- 来源文件：`frontend/html/signature.html`
-- 来源文件：`frontend/html/verify.html`
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 <!-- 官方资源扩展 -->
 - [Vue 2 官方文档 - 条件渲染](https://v2.vuejs.org/v2/guide/conditional.html)

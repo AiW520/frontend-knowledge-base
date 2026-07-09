@@ -1,4 +1,4 @@
-# localStorage 与 Token 存储
+﻿# localStorage 与 Token 存储
 
 ## 知识简介
 
@@ -50,13 +50,13 @@ logout() {
 
 ## 关键代码示例
 
-来源：`frontend/html/login.html` 第 87 行
+示例来源：通用训练工程抽象
 
 ```javascript
 localStorage.setItem('Authorization', response.data.data)
 ```
 
-来源：`frontend/html/account.html` 第 109-110 行
+示例来源：通用训练工程抽象
 
 ```javascript
 axios.interceptors.request.use(request => {
@@ -65,7 +65,7 @@ axios.interceptors.request.use(request => {
 })
 ```
 
-来源：`frontend/html/account.html` 第 103 行
+示例来源：通用训练工程抽象
 
 ```javascript
 localStorage.removeItem("Authorization")
@@ -97,10 +97,10 @@ localStorage.removeItem("Authorization")
 
 ## 资料来源
 
-- 来源文件：`frontend/html/login.html` 第 87 行
-- 来源文件：`frontend/html/account.html` 第 103、109-110 行
-- 来源文件：`frontend/html/myseal.html` 第 69、75 行
-- 来源文件：`供应链—front/src/components/Header.vue`
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

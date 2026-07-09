@@ -1,4 +1,4 @@
-<!-- 知识点名称 -->
+﻿<!-- 知识点名称 -->
 # Vue 模板语法
 
 <!-- 知识简介 -->
@@ -36,7 +36,7 @@ Vue 使用基于 HTML 的模板语法，允许将 DOM 元素与 Vue 实例的数
 - `@click` 是 `v-on:click` 的简写
 
 <!-- 关键代码示例 -->
-来源：`frontend/html/record.html` 第 70-96 行
+示例来源：通用训练工程抽象
 ```html
 <tr v-for="(record,index) of records" :key="index">
     <td>{{record.id}}</td>
@@ -69,8 +69,8 @@ Vue 使用基于 HTML 的模板语法，允许将 DOM 元素与 Vue 实例的数
 - [列表渲染](/knowledge/vue-list-rendering)
 
 <!-- 资料来源 -->
-- 来源文件：`frontend/html/login.html`、`frontend/html/record.html`、`frontend/html/account.html`
-- 来源文件：`供应链—front/src/views/Home.vue`
+- 示例来源：通用训练工程抽象、`frontend/html/record.html`、`frontend/html/account.html`
+- 示例来源：通用训练工程抽象
 
 <!-- 官方资源扩展 -->
 - [Vue 2 官方文档 - 模板语法](https://v2.vuejs.org/v2/guide/syntax.html)

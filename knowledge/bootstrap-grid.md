@@ -1,4 +1,4 @@
-# Bootstrap 栅格系统
+﻿# Bootstrap 栅格系统
 
 ## 知识简介
 
@@ -14,7 +14,7 @@ Bootstrap 3 提供基于 12 列的响应式栅格系统，通过 `container`、`
 
 ## 详细讲解
 
-在电子签章系统中，栅格系统广泛应用于页面布局。案例展示区使用 `col-md-4` 实现三列等宽布局：
+在Vue2 业务演示项目中，栅格系统广泛应用于页面布局。案例展示区使用 `col-md-4` 实现三列等宽布局：
 
 ```html
 <div class="container">
@@ -43,7 +43,7 @@ Bootstrap 3 提供基于 12 列的响应式栅格系统，通过 `container`、`
         <img src="images/custom_1.jpg">
     </div>
     <div class="col-md-7">
-        <h2>传统电子签章系统的弊端</h2>
+        <h2>传统Vue2 业务演示项目的弊端</h2>
         <p>...</p>
     </div>
 </div>
@@ -71,7 +71,7 @@ Bootstrap 3 提供基于 12 列的响应式栅格系统，通过 `container`、`
 
 ## 关键代码示例
 
-来源：`frontend/index.html` 第 76-93 行
+示例来源：通用训练工程抽象
 
 ```html
 <div class="case container">
@@ -92,7 +92,7 @@ Bootstrap 3 提供基于 12 列的响应式栅格系统，通过 `container`、`
 </div>
 ```
 
-来源：`frontend/html/main.html` 第 29-53 行
+示例来源：通用训练工程抽象
 
 ```html
 <div class="row">
@@ -131,9 +131,9 @@ Bootstrap 3 提供基于 12 列的响应式栅格系统，通过 `container`、`
 
 ## 资料来源
 
-- 来源文件：`frontend/index.html` 第 76-125 行
-- 来源文件：`frontend/html/main.html` 第 29-53 行
-- 来源文件：`frontend/html/details.html` 第 37-102 行
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

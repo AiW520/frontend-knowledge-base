@@ -1,4 +1,4 @@
-# Element UI 表格组件
+﻿# Element UI 表格组件
 
 ## 知识简介
 
@@ -13,7 +13,7 @@ Element UI 的 `el-table` 组件用于展示结构化数据，支持排序、筛
 
 ## 详细讲解
 
-在供应链金融项目的 Home 页面中，使用 `el-table` 展示票据列表数据：
+在Vue2 业务演示项目的 Home 页面中，使用 `el-table` 展示票据列表数据：
 
 ```html
 <el-table :data="receiptList" class="content">
@@ -56,7 +56,7 @@ methods: {
 
 ## 关键代码示例
 
-来源：`供应链—front/src/views/Home.vue` 第 14-21 行
+示例来源：通用训练工程抽象
 
 ```html
 <el-table :data="receiptList" class="content">
@@ -69,7 +69,7 @@ methods: {
 </el-table>
 ```
 
-来源：`供应链—front/src/views/Home.vue` 第 47-59 行
+示例来源：通用训练工程抽象
 
 ```javascript
 query: function() {
@@ -110,7 +110,7 @@ query: function() {
 
 ## 资料来源
 
-- 来源文件：`供应链—front/src/views/Home.vue`
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

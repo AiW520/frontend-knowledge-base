@@ -1,8 +1,8 @@
-# axios 高级封装
+﻿# axios 高级封装
 
 ## 知识简介
 
-在大型项目中，axios 需要进行封装才能高效复用。常见封装包括：请求/响应拦截器、统一错误处理、Token 自动注入、API 集中管理、RESTful 参数绑定。jinzhuan-project-web 项目展示了企业级 axios 封装的完整方案。
+在大型项目中，axios 需要进行封装才能高效复用。常见封装包括：请求/响应拦截器、统一错误处理、Token 自动注入、API 集中管理、RESTful 参数绑定。Vue3 项目级训练工程展示了企业级 axios 封装的完整方案。
 
 ## 核心概念
 
@@ -14,7 +14,7 @@
 
 ## 详细讲解
 
-jinzhuan-project-web 项目的 axios 封装分为三个层次：
+Vue3 项目级训练工程的 axios 封装分为三个层次：
 
 ### 1. API 定义层（api.ts）
 ```javascript
@@ -62,7 +62,7 @@ axios.interceptors.response.use(
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/src/fetch/index.ts`
+示例来源：通用训练工程抽象
 
 ```javascript
 // 请求拦截器
@@ -134,9 +134,9 @@ axios.interceptors.response.use(
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`src/fetch/index.ts`（axios 封装、拦截器、Fetch 函数）
-- 来源文件：`src/fetch/api.ts`（API 定义）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（axios 封装、拦截器、Fetch 函数）
+- 示例来源：通用训练工程抽象（API 定义）
 
 ## 官方资源扩展
 

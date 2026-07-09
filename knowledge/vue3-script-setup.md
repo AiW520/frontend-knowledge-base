@@ -1,4 +1,4 @@
-# Vue 3 script setup 语法糖
+﻿# Vue 3 script setup 语法糖
 
 ## 知识简介
 
@@ -13,7 +13,7 @@
 
 ## 详细讲解
 
-jinzhuan-project-web 项目中全面使用了 `script setup` 语法糖，这是现代 Vue 3 项目的标准写法。
+Vue3 项目级训练工程中全面使用了 `script setup` 语法糖，这是现代 Vue 3 项目的标准写法。
 
 在 `script setup` 中：
 - 导入的组件自动注册，无需 `components` 选项
@@ -45,7 +45,7 @@ const showSider = computed(() => route.name !== 'login')
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/src/components/Layout/layout.vue`
+示例来源：通用训练工程抽象
 
 ```ts
 import { useRouter, useRoute } from "vue-router"
@@ -104,11 +104,11 @@ watch(() => route.name, async (newVal) => {
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`src/components/Layout/layout.vue`（完整 script setup 示例）
-- 来源文件：`src/App.vue`（watch、useRoute）
-- 来源文件：`src/views/home/index.vue`（组件导入）
-- 来源文件：`src/views/login/index.vue`（组件导入）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（完整 script setup 示例）
+- 示例来源：通用训练工程抽象（watch、useRoute）
+- 示例来源：通用训练工程抽象（组件导入）
+- 示例来源：通用训练工程抽象（组件导入）
 
 ## 官方资源扩展
 

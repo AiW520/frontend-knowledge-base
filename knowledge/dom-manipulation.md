@@ -1,4 +1,4 @@
-# DOM 操作
+﻿# DOM 操作
 
 ## 知识简介
 
@@ -52,31 +52,31 @@ this.$router.push('/login')
 
 ## 关键代码示例
 
-来源：`frontend/html/signature.html` 第 122 行
+示例来源：通用训练工程抽象
 
 ```javascript
 this.$refs.file.click()
 ```
 
-来源：`frontend/html/signature.html` 第 112 行
+示例来源：通用训练工程抽象
 
 ```javascript
 var file = document.getElementById("file")
 ```
 
-来源：`frontend/html/signature.html` 第 158 行
+示例来源：通用训练工程抽象
 
 ```javascript
 img.setAttribute('src', base64)
 ```
 
-来源：`frontend/html/login.html` 第 83 行
+示例来源：通用训练工程抽象
 
 ```javascript
 window.location.href = "main.html"
 ```
 
-来源：`供应链—front/src/components/Navigator.vue` 第 23 行
+示例来源：通用训练工程抽象
 
 ```javascript
 this.$router.push('/home')
@@ -108,9 +108,9 @@ this.$router.push('/home')
 
 ## 资料来源
 
-- 来源文件：`frontend/html/signature.html` 第 112、122、158 行
-- 来源文件：`frontend/html/login.html` 第 83 行
-- 来源文件：`供应链—front/src/components/Navigator.vue`
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

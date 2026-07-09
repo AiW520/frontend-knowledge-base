@@ -1,4 +1,4 @@
-# Element UI 表单组件
+﻿# Element UI 表单组件
 
 ## 知识简介
 
@@ -14,11 +14,11 @@ Element UI 提供丰富的表单组件，包括 `el-form`、`el-form-item`、`el
 
 ## 详细讲解
 
-在供应链金融项目的登录页面中，使用 Element UI 表单组件构建登录表单：
+在Vue2 业务演示项目的登录页面中，使用 Element UI 表单组件构建登录表单：
 
 ```html
 <el-form label-width="80px">
-    <h1>供应链金融应用</h1>
+    <h1>Vue2 业务演示项目</h1>
     <h3>登录页面</h3>
     <el-form-item label="用户地址:">
         <el-input type="primary" v-model="address"></el-input>
@@ -45,11 +45,11 @@ Element UI 提供丰富的表单组件，包括 `el-form`、`el-form-item`、`el
 
 ## 关键代码示例
 
-来源：`供应链—front/src/views/Login.vue` 第 10-22 行
+示例来源：通用训练工程抽象
 
 ```html
 <el-form label-width="80px">
-    <h1>供应链金融应用</h1>
+    <h1>Vue2 业务演示项目</h1>
     <h3>登录页面</h3>
     <el-form-item label="用户地址:">
         <el-input type="primary" v-model="address"></el-input>
@@ -63,7 +63,7 @@ Element UI 提供丰富的表单组件，包括 `el-form`、`el-form-item`、`el
 </el-form>
 ```
 
-来源：`供应链—front/src/views/Login.vue` 第 36-40 行
+示例来源：通用训练工程抽象
 
 ```javascript
 data() {
@@ -74,7 +74,7 @@ data() {
 }
 ```
 
-来源：`供应链—front/src/views/Login.vue` 第 26-28 行
+示例来源：通用训练工程抽象
 
 ```html
 <el-button type="primary" @click="login">登录</el-button>
@@ -107,8 +107,8 @@ data() {
 
 ## 资料来源
 
-- 来源文件：`供应链—front/src/views/Login.vue`
-- 来源文件：`供应链—front/src/views/Register.vue`
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

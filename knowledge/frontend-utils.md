@@ -1,8 +1,8 @@
-# 前端工具函数
+﻿# 前端工具函数
 
 ## 知识简介
 
-前端项目中经常需要编写各类工具函数，包括节流防抖、日期格式化、文件下载、随机数生成、数字格式化、剪贴板操作等。jinzhuan-project-web 项目的 `src/utils/index.ts` 文件包含丰富的工具函数实现。
+前端项目中经常需要编写各类工具函数，包括节流防抖、日期格式化、文件下载、随机数生成、数字格式化、剪贴板操作等。Vue3 项目级训练工程的 `src/utils/index.ts` 文件包含丰富的工具函数实现。
 
 ## 核心概念
 
@@ -64,7 +64,7 @@ export function Debounce() {
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/src/utils/index.ts`
+示例来源：通用训练工程抽象
 
 ```javascript
 // 节流函数
@@ -138,9 +138,9 @@ export const copyText = (text) => {
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`src/utils/index.ts`（完整工具函数库）
-- 来源文件：`src/utils/randomUtil.ts`（随机数工具类）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（完整工具函数库）
+- 示例来源：通用训练工程抽象（随机数工具类）
 
 ## 官方资源扩展
 

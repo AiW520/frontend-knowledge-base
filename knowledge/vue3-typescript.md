@@ -1,8 +1,8 @@
-# TypeScript 基础（前端）
+﻿# TypeScript 基础（前端）
 
 ## 知识简介
 
-TypeScript 是 JavaScript 的超集，添加了静态类型系统。在前端项目中，TypeScript 帮助在编译阶段发现类型错误，提高代码质量和可维护性。jinzhuan-project-web 项目全面使用 TypeScript。
+TypeScript 是 JavaScript 的超集，添加了静态类型系统。在前端项目中，TypeScript 帮助在编译阶段发现类型错误，提高代码质量和可维护性。Vue3 项目级训练工程全面使用 TypeScript。
 
 ## 核心概念
 
@@ -15,7 +15,7 @@ TypeScript 是 JavaScript 的超集，添加了静态类型系统。在前端项
 
 ## 详细讲解
 
-在 jinzhuan-project-web 项目中，TypeScript 用于：
+在 Vue3 项目级训练工程中，TypeScript 用于：
 1. **接口定义**：定义 API 请求参数、响应数据的结构
 2. **组件类型**：Vue 组件的 props、emits 类型
 3. **类型安全**：避免运行时类型错误
@@ -49,7 +49,7 @@ interface IParams {
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/src/fetch/index.ts`
+示例来源：通用训练工程抽象
 
 ```typescript
 // 定义 RESTful 参数接口
@@ -101,11 +101,11 @@ interface AxiosRequestProps extends AxiosRequestConfig {
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`src/fetch/index.ts`（接口定义、类型扩展）
-- 来源文件：`src/hooks/interface.ts`（类型定义）
-- 来源文件：`src/store/interface.ts`（状态类型定义）
-- 来源文件：`tsconfig.json`（TypeScript 配置）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（接口定义、类型扩展）
+- 示例来源：通用训练工程抽象（类型定义）
+- 示例来源：通用训练工程抽象（状态类型定义）
+- 示例来源：通用训练工程抽象（TypeScript 配置）
 
 ## 官方资源扩展
 

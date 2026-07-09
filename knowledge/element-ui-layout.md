@@ -1,4 +1,4 @@
-# Element UI 布局系统
+﻿# Element UI 布局系统
 
 ## 知识简介
 
@@ -13,7 +13,7 @@ Element UI 提供基于 24 栅格的布局系统，通过 `el-row` 和 `el-col` 
 
 ## 详细讲解
 
-在供应链金融项目中，Element UI 的布局系统用于搭建整个应用的结构。典型的页面布局使用 `el-container` 配合 `el-header`、`el-aside`、`el-main` 实现上-左-右三段式布局。
+在Vue2 业务演示项目中，Element UI 的布局系统用于搭建整个应用的结构。典型的页面布局使用 `el-container` 配合 `el-header`、`el-aside`、`el-main` 实现上-左-右三段式布局。
 
 引入 Element UI 的方式：
 ```javascript
@@ -59,7 +59,7 @@ Home 页面的布局结构：
 
 ## 关键代码示例
 
-来源：`供应链—front/src/views/Home.vue` 第 2-27 行
+示例来源：通用训练工程抽象
 
 ```html
 <el-container>
@@ -84,7 +84,7 @@ Home 页面的布局结构：
 </el-container>
 ```
 
-来源：`供应链—front/src/views/Login.vue` 第 2-6 行
+示例来源：通用训练工程抽象
 
 ```html
 <el-row style="height: 100%">
@@ -119,9 +119,9 @@ Home 页面的布局结构：
 
 ## 资料来源
 
-- 来源文件：`供应链—front/src/views/Home.vue`
-- 来源文件：`供应链—front/src/views/Login.vue`
-- 来源文件：`供应链—front/src/main.js` 第 2-3 行
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

@@ -1,4 +1,4 @@
-# axios 拦截器
+﻿# axios 拦截器
 
 ## 知识简介
 
@@ -43,7 +43,7 @@ axios.interceptors.response.use(response => {
 
 ## 关键代码示例
 
-来源：`frontend/html/account.html` 第 108-121 行
+示例来源：通用训练工程抽象
 
 ```javascript
 mounted() {
@@ -96,11 +96,11 @@ mounted() {
 
 ## 资料来源
 
-- 来源文件：`frontend/html/account.html` 第 108-121 行
-- 来源文件：`frontend/html/myseal.html` 第 73-86 行
-- 来源文件：`frontend/html/record.html` 第 116-130 行
-- 来源文件：`frontend/html/signature.html` 第 198-212 行
-- 来源文件：`frontend/html/verify.html` 第 175-189 行
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

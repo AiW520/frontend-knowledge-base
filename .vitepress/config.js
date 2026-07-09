@@ -18,23 +18,24 @@ export default defineConfig({
     
     nav: [
       { text: '首页', link: '/' },
-      { text: '🏆 金砖大赛区块链', link: '/knowledge/blockchain-frontend-overview' },
-      { text: 'Vue 2', link: '/knowledge/vue-instance' },
-      { text: 'Vue 3', link: '/knowledge/vue3-composition-api' },
+      { text: 'Vue3 挖空训练', link: '/knowledge/vue3-project-blank-camp' },
+      { text: '前端路线', link: '/knowledge/frontend-competition-roadmap' },
+      { text: '题型训练', link: '/knowledge/frontend-fill-blank-training' },
+      { text: 'Vue3 工程', link: '/knowledge/vue3-composition-api' },
       { text: 'axios', link: '/knowledge/axios-http' },
-      { text: 'Element UI', link: '/knowledge/element-ui-layout' },
       { text: 'Ant Design Vue', link: '/knowledge/ant-design-vue3' },
       { text: 'Vite', link: '/knowledge/vite' },
-      { text: 'Bootstrap', link: '/knowledge/bootstrap-grid' }
+      { text: 'Vue2 省赛补充', link: '/knowledge/vue-instance' }
     ],
     
     sidebar: [
       {
-        text: '🏆 金砖大赛 - 区块链前端',
+        text: '🏆 金砖前端主线：Vue3 项目级挖空',
         collapsed: false,
         items: [
           { text: '赛项概述与赛程', link: '/knowledge/blockchain-frontend-overview' },
           { text: '前端竞赛考点学习路径', link: '/knowledge/frontend-competition-roadmap' },
+          { text: 'Vue3 项目级挖空训练营', link: '/knowledge/vue3-project-blank-camp' },
           { text: '前端填空题型训练', link: '/knowledge/frontend-fill-blank-training' },
           { text: 'Vue 3 登录表单开发', link: '/knowledge/vue3-ts-project-setup' },
           { text: 'Vue 3 数据列表与表格', link: '/knowledge/element-plus' },
@@ -44,12 +45,13 @@ export default defineConfig({
           { text: 'Element Plus 表单验证', link: '/knowledge/smart-contract-frontend' },
           { text: '错误处理与用户反馈', link: '/knowledge/blockchain-data-visualization' },
           { text: '项目配置与环境搭建', link: '/knowledge/form-validation' },
+          { text: '前端联调最小知识', link: '/knowledge/frontend-fullstack-context' },
           { text: '综合实战：完整页面开发', link: '/knowledge/frontend-deployment' }
         ]
       },
       {
-        text: '🔷 金砖大赛 - 区块链后端',
-        collapsed: false,
+        text: '🔗 前端联调参考：后端 / 合约 / 链端',
+        collapsed: true,
         items: [
           { text: '📖 后端开发总览', link: '/knowledge/blockchain-backend-overview' },
           {
@@ -118,7 +120,7 @@ export default defineConfig({
         ]
       },
       {
-        text: 'Vue 2 核心',
+        text: 'Vue2 省赛补充学习',
         collapsed: true,
         items: [
           { text: 'Vue 实例创建', link: '/knowledge/vue-instance' },
@@ -222,7 +224,7 @@ export default defineConfig({
     },
     
     footer: {
-      message: '基于 VitePress 构建 | 原创新前端资源',
+      message: '基于 VitePress 构建 | 前端训练知识库',
       copyright: '前端知识库'
     },
     

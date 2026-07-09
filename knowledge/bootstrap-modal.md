@@ -1,4 +1,4 @@
-# Bootstrap 模态框
+﻿# Bootstrap 模态框
 
 ## 知识简介
 
@@ -16,7 +16,7 @@ Bootstrap 3 的模态框（Modal）是弹窗对话框组件，用于展示内容
 
 ## 详细讲解
 
-在电子签章系统中，模态框用于展示签章文档的详情。签章记录页面中，每条记录都有一个"查看"按钮，点击后弹出模态框显示签章文档图片：
+在Vue2 业务演示项目中，模态框用于展示签章文档的详情。签章记录页面中，每条记录都有一个"查看"按钮，点击后弹出模态框显示签章文档图片：
 
 ```html
 <button class="btn btn-primary" data-toggle="modal" 
@@ -69,7 +69,7 @@ Bootstrap 3 的模态框（Modal）是弹窗对话框组件，用于展示内容
 
 ## 关键代码示例
 
-来源：`frontend/html/record.html` 第 76-95 行
+示例来源：通用训练工程抽象
 
 ```html
 <button class="btn btn-primary" data-toggle="modal" 
@@ -95,7 +95,7 @@ Bootstrap 3 的模态框（Modal）是弹窗对话框组件，用于展示内容
 </div>
 ```
 
-来源：`frontend/html/login.html` 第 22-44 行
+示例来源：通用训练工程抽象
 
 ```html
 <div id="app" class="modal-dialog" style="margin-top: 10%;">
@@ -139,9 +139,9 @@ Bootstrap 3 的模态框（Modal）是弹窗对话框组件，用于展示内容
 
 ## 资料来源
 
-- 来源文件：`frontend/html/record.html` 第 76-95 行
-- 来源文件：`frontend/html/login.html` 第 22-44 行
-- 来源文件：`frontend/html/verify.html` 第 65-99 行
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

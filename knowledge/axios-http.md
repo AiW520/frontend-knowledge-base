@@ -1,4 +1,4 @@
-# axios HTTP 请求
+﻿# axios HTTP 请求
 
 ## 知识简介
 
@@ -35,7 +35,7 @@ axios.get("http://localhost/seal/record").then(response => {
 })
 ```
 
-在供应链金融项目中，axios 通过 vue-axios 插件集成到 Vue 原型上，可以直接通过 `this.axios` 访问：
+在Vue2 业务演示项目中，axios 通过 vue-axios 插件集成到 Vue 原型上，可以直接通过 `this.axios` 访问：
 
 ```javascript
 this.axios.post('/finance/org/login', postData).then((response) => {
@@ -55,7 +55,7 @@ this.axios.post('/finance/org/login', postData).then((response) => {
 
 ## 关键代码示例
 
-来源：`frontend/html/login.html` 第 77-95 行
+示例来源：通用训练工程抽象
 
 ```javascript
 axios.post("http://localhost/user/login", this.user).then(response => {
@@ -74,7 +74,7 @@ axios.post("http://localhost/user/login", this.user).then(response => {
 })
 ```
 
-来源：`frontend/html/record.html` 第 132-137 行
+示例来源：通用训练工程抽象
 
 ```javascript
 axios.get("http://localhost/seal/record").then(response => {
@@ -85,7 +85,7 @@ axios.get("http://localhost/seal/record").then(response => {
 })
 ```
 
-来源：`供应链—front/src/main.js` 第 13 行
+示例来源：通用训练工程抽象
 
 ```javascript
 axios.defaults.baseURL = '/api'
@@ -118,11 +118,11 @@ axios.defaults.baseURL = '/api'
 
 ## 资料来源
 
-- 来源文件：`frontend/html/login.html` 第 77-95 行
-- 来源文件：`frontend/html/register.html` 第 118-128 行
-- 来源文件：`frontend/html/record.html` 第 132-137 行
-- 来源文件：`供应链—front/src/views/Login.vue`
-- 来源文件：`供应链—front/src/main.js` 第 13 行
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象
 
 ## 官方资源扩展
 

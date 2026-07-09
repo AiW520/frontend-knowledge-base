@@ -1,8 +1,8 @@
-# Vite 插件系统
+﻿# Vite 插件系统
 
 ## 知识简介
 
-Vite 插件扩展了 Vite 的功能，可以拦截请求、转换代码、优化构建等。插件系统基于 Rollup 插件接口，同时提供 Vite 特有的钩子。jinzhuan-project-web 项目使用了多个 Vite 插件来增强开发体验。
+Vite 插件扩展了 Vite 的功能，可以拦截请求、转换代码、优化构建等。插件系统基于 Rollup 插件接口，同时提供 Vite 特有的钩子。Vue3 项目级训练工程使用了多个 Vite 插件来增强开发体验。
 
 ## 核心概念
 
@@ -14,7 +14,7 @@ Vite 插件扩展了 Vite 的功能，可以拦截请求、转换代码、优化
 
 ## 详细讲解
 
-在 jinzhuan-project-web 的 `vite.config.ts` 中，配置了以下插件：
+在 Vue3 项目级训练工程 的 `vite.config.ts` 中，配置了以下插件：
 
 ### 1. Vue 插件
 ```typescript
@@ -72,7 +72,7 @@ WindiCSS()
 
 ## 关键代码示例
 
-来源：`jinzhuan-project-web/vite.config.ts`
+示例来源：通用训练工程抽象
 
 ```typescript
 import { defineConfig } from 'vite'
@@ -125,9 +125,9 @@ export default defineConfig({
 
 ## 资料来源
 
-- 来源项目：`新前端资源/jinzhuan-project-web/`
-- 来源文件：`vite.config.ts`（完整插件配置）
-- 来源文件：`package.json`（插件依赖列表）
+- 示例来源：通用训练工程抽象
+- 示例来源：通用训练工程抽象（完整插件配置）
+- 示例来源：通用训练工程抽象（插件依赖列表）
 
 ## 官方资源扩展
 
