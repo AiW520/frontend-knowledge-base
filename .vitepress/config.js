@@ -5,6 +5,13 @@ export default defineConfig({
   description: '基于项目实战的前端开发知识库',
   base: '/frontend-knowledge-base/',
   ignoreDeadLinks: true,
+  head: [
+    [
+      'script',
+      {},
+      `(function(){try{var key='bri-training-access-v1';var hash='4a547a10159a34bb09095bbef633288e128748c9d119047d130368ee53b9788c';if(localStorage.getItem(key)!==hash){document.documentElement.setAttribute('data-access-lock','locked')}}catch(error){document.documentElement.setAttribute('data-access-lock','locked')}})();`
+    ]
+  ],
   
   themeConfig: {
     siteTitle: '前端知识库',

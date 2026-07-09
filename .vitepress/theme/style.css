@@ -1,0 +1,99 @@
+html[data-access-lock="locked"] {
+  overflow: hidden;
+}
+
+html[data-access-lock="locked"] .VPNav,
+html[data-access-lock="locked"] .VPLocalNav,
+html[data-access-lock="locked"] .VPSidebar,
+html[data-access-lock="locked"] .VPContent,
+html[data-access-lock="locked"] .VPFooter {
+  visibility: hidden;
+}
+
+.training-access-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    linear-gradient(135deg, rgba(13, 18, 32, 0.92), rgba(24, 38, 56, 0.9)),
+    radial-gradient(circle at top left, rgba(47, 129, 247, 0.28), transparent 32%);
+}
+
+.training-access-card {
+  width: min(420px, 100%);
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+}
+
+.training-access-kicker {
+  margin-bottom: 10px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.training-access-title {
+  margin: 0;
+  color: #111827;
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+.training-access-desc {
+  margin: 12px 0 20px;
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.training-access-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #111827;
+  background: #fff;
+  font-size: 15px;
+  outline: none;
+}
+
+.training-access-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+}
+
+.training-access-error {
+  margin: 10px 0 0;
+  color: #b91c1c;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.training-access-button {
+  width: 100%;
+  height: 44px;
+  margin-top: 18px;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  background: #2563eb;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.training-access-button:hover {
+  background: #1d4ed8;
+}
+
+.training-access-button:disabled {
+  background: #94a3b8;
+  cursor: wait;
+}
